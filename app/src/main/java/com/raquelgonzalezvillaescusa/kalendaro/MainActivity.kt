@@ -18,9 +18,14 @@ TODO Cosas a corregir
 ---- OK -----
 - Crear en dia actual la opcion de añadir rutina (que lleve a categorias-> rutinas-> actividad (fecha por defecto la de hoy))--- OKIII (testear bien)
 -------------
+- AÑADIR FECHA DE FIN A LAS RUTINAS (opcional) para que se añadan a varios dias
+
+- Añadir icono de "No content" en las listas o paginas sin contenido
+- Cambiar icono de foto uno para foto categorias otro para rutinas otro para actividades,(hechos por mi) ahora sale negro cuando no metemos foto png (recuperar codigo anterior si no)
 - Poder eliminar una rutina del dia actual (y probar bien la eliminacion de rutinas que se llaman igual en distintas categorias)
+- Poder editar una categoria y una rutina (horas titulo etc)
 - Cambiar el botón de back por el de inicio que lleve al dia actual o quitarlo mejor (o hacerlo bien con el bundle)
-- Añadir recuadro de texto de anotación en dia actual.
+- Añadir recuadro de texto de anotación en dia actual (boton ver anotaciones o recuadro de texto en la lista de rutinas).
 
 - Al clickar en una actividad ver sus detalles (pudiendo editar los campos)
     - Hora

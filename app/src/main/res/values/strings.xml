@@ -38,7 +38,9 @@
     <string name="rutina_insert_imagen_text">INSERTE NOMBRE, FECHA Y \nPORTADA DE LA RUTINA</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
-    <string name="rutina_input_fecha">FECHA</string>
+    <string name="rutina_input_fecha_inicio">FECHA INICIO</string>
+    <string name="rutina_input_fecha_fin">FECHA FIN</string>
+
     <!--Crear Actividad-->
     <string name="actividad_nombre">ACTIVIDAD</string>
     <string name="actividad_input_hora">HORA DE INICIO</string>
