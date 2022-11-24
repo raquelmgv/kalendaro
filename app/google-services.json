@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "150229484343",
+    "firebase_url": "https://kalendaro-f0b8b.firebaseio.com",
+    "project_id": "kalendaro-f0b8b",
+    "storage_bucket": "kalendaro-f0b8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150229484343:android:d22961a2f0f71fa2a090b2",
+        "android_client_info": {
+          "package_name": "com.raquelgonzalezvillaescusa.kalendaro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150229484343-fp8hoon7kttahedch14lv4tatlesiuui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.raquelgonzalezvillaescusa.kalendaro",
+            "certificate_hash": "7fd0fe5a559145870a97250b1c835a0c4fc7933c"
+          }
+        },
+        {
+          "client_id": "150229484343-lo081pd24sa3kflvbafkio8gd406deug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAloe_PZfgfJ4by1alzITZJz211o3NK26A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150229484343-lo081pd24sa3kflvbafkio8gd406deug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

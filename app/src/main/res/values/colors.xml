@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorWhiteText">#FFFFFF</color>
+    <color name="colorPrimary">#9663c4</color>
+    <color name="colorPrimaryDark">#6d28aa</color>
+    <color name="colorAccent">#e0cee0</color>
+    <color name="colorAccentDark">#c6aadb</color>
+    <color name="colorPrimaryText">#FFFFFF</color>
+    <color name="colorSecondaryText">#BDBDBD</color>
+    <color name="colorChatBg">#CCC</color>
+    <color name="colorFondoDiaActual">#CCFFFF</color>
+    <color name="colorFondoListView">#E6FAFF</color>
+
+    <color name="colorGooglePlus">#DD4B39</color>
+    <color name="colorGooglePlusDark">#B92D21</color>
+</resources>

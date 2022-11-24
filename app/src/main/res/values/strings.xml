@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">KALENDARO</string>
+    <!--Login View-->
+    <string name="login_email">Email</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_confirm_password">Confirmar contraseña</string>
+    <string name="login_sign_in">Iniciar Sesión</string>
+    <string name="login_sign_up">Registrarse</string>
+    <string name="login_reset_password">Cambiar contraseña</string>
+    <string name="login_sign_in_google">Iniciar Sesión con Google</string>
+    <string name="login_forgot_password">He olvidado mi contraseña</string>
+    <string name="login_create_account">REGISTRARSE</string>
+    <string name="login_go_login">Volver al Inicio de Sesión</string>
+    <!--    Menu View-->
+    <string name="menu_dia_actual">Hoy</string>
+    <string name="menu_calendario">Calendario</string>
+    <string name="menu_rutinas">Rutinas</string>
+    <string name="menu_tareas">Tareas</string>
+    <string name="menu_categoria_rutinas">Categorías</string>
+    <string name="menu_crear_categoria">Crear Categoría</string>
+    <string name="menu_crear_rutina">Crear Rutina</string>
+    <string name="menu_crear_rutina_hoy">Crear Rutina para hoy</string>
+    <string name="menu_configuracion">Configuración</string>
+    <string name="menu_editar_perfil">Editar Perfil</string>
+    <string name="menu_log_out">Cerrar Sesión</string>
+    <!--Crear Categoria-->
+    <string name="categoria_insert_nombre">Nombre de la categoría</string>
+    <string name="categoria_buscar_galeria">GALERÍA</string>
+    <string name="categoria_buscar_camara">HACER FOTO</string>
+    <string name="categoria_buscar_arasaac">ARASAAC</string>
+    <string name="categoria_guardar">GUARDAR</string>
+    <string name="categoria_continuar">CONTINUAR</string>
+    <string name="categoria_insert_imagen_text">INSERTE NOMBRE E IMAGEN DE LA CATEGORÍA</string>
+    <!--List View Categorias-->
+    <string name="categoria_crear">Crear nueva categoría</string>
+    <!--Crear Rutina-->
+    <string name="rutina_insert_nombre">Nombre de la rutina</string>
+    <string name="rutina_insert_imagen_text">INSERTE NOMBRE, FECHA Y \nPORTADA DE LA RUTINA</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="rutina_input_fecha">FECHA</string>
+    <!--Crear Actividad-->
+    <string name="actividad_nombre">ACTIVIDAD</string>
+    <string name="actividad_input_hora">HORA DE INICIO</string>
+    <string name="actividad_input_nombre">ACTIVIDAD</string>
+    <string name="actividad_aniadir">AÑADIR ACTIVIDAD</string>
+    <string name="actividad_insert_imagen">INSERTE NOMBRE, HORA\n E IMAGEN DE LA ACTIVIDAD</string>
+    <string name="actividad_edit_imagen">MODIFIQUE NOMBRE, HORA DE INICIO\n O IMAGEN DE LA ACTIVIDAD</string>
+    <string name="actividad_insert_nombre">Nombre de la actividad</string>
+    <string name="menu_crear_actividad">Crear Actividad</string>
+    <string name="menu_editar_actividad">Editar Actividad</string>
+
+    <!--Dialog Options-->
+    <string name="dialog_repe_cat">"Ya existe categoría con este nombre.\n¿Desea sustituirla?."</string>
+    <string name="dialog_repe_rut">"Ya existe rutina con este nombre.\n¿Desea sustituirla?"</string>
+    <string name="dialog_repe_act">"Ya existe actividad para esta hora.\n¿Desea sustituirla?"</string>
+    <string name="dialog_delete_cat">"Al eliminar la categoría seleccionada\nse eliminarán también las rutinas que contiene."</string>
+    <string name="dialog_delete_rut">"Al eliminar la rutina seleccionada\nse eliminarán también las actividades que contiene."</string>
+    <string name="dialog_delete_act">"Se eliminará la actividad seleccionada."</string>
+
+</resources>

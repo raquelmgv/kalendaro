@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TableLayout
+        android:id="@+id/tableLayout_rutina_details_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+            <TextView
+                android:id="@+id/actividad_display_hora"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:hint="@string/actividad_input_hora"
+                android:textSize="@dimen/list_text_size"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+
+            <TextView
+                android:id="@+id/actividad_display_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/list_actividad_name_size"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:gravity="center"
+                android:text="@string/actividad_input_nombre" />
+
+            <ImageView
+                android:id="@+id/actividad_imagen"
+                android:layout_height="150dp"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:gravity="center"
+                app:srcCompat="@drawable/arasaac_fotografia" />
+
+
+        </TableLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!-- Archivo de recursos donde guardamos las medidas que se van a usar en los layouts-->
+    <dimen name= "login_space">25dp</dimen>
+    <dimen name= "login_edit_text_space" >10dp</dimen>
+    <dimen name= "login_edit_text_height">50dp</dimen>
+    <dimen name= "login_button_height" >50dp</dimen>
+    <dimen name= "login_button_xl_height">60dp</dimen>
+    <dimen name= "login_text_xl_size">18sp</dimen>
+    <dimen name= "login_text_size">18sp</dimen>
+    <dimen name= "bar_actual_view">40dp</dimen>
+
+    <!--Crear categoria-->
+    <dimen name= "categoria_botones_imagen">40dp</dimen>
+    <!--Listas-->
+    <dimen name= "list_text_size">20dp</dimen>
+    <dimen name= "list_actividad_name_size">16dp</dimen>
+    <dimen name= "list_secondary_text_size">15dp</dimen>
+    <!--BarActualView-->
+    <dimen name= "bar_text_size">25dp</dimen>
+
+</resources>

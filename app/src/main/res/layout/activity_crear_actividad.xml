@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".activities.CrearActividadActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"></include>
+
+        <TextView
+            android:id="@+id/barActualViewActividad"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bar_actual_view"
+            android:layout_marginBottom="32dp"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp"
+            android:text="@string/menu_crear_actividad"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/bar_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/insertImageText"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/insertImageText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="@string/actividad_insert_imagen"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/login_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/editTextCrearActividad"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <ImageView
+            android:id="@+id/crearActividadImagen"
+            android:layout_width="161dp"
+            android:layout_height="149dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/arasaac_fotografia"
+            android:contentDescription="TODO"
+            app:layout_constraintBottom_toTopOf="@+id/buttonActividadImagenGaleria"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/buttonActividadImagenGaleria"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/categoria_botones_imagen"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/button_ripple_bg"
+            android:text="@string/categoria_buscar_galeria"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/login_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/buttonActividadImagenCamara"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+        <ImageView
+            android:id="@+id/iconoGaleria"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/arasaac_album"
+            android:contentDescription="TODO"
+            app:layout_constraintBottom_toTopOf="@+id/buttonActividadImagenCamara"
+            app:layout_constraintEnd_toStartOf="@+id/buttonActividadImagenGaleria"
+            app:layout_constraintHorizontal_bias="0.461"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/buttonActividadImagenCamara"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/categoria_botones_imagen"
+            android:layout_marginStart="64dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/button_ripple_bg"
+            android:text="@string/categoria_buscar_camara"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/login_text_size"
+
+            app:layout_constraintBottom_toTopOf="@+id/buttonGuardarActividad"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/iconoCamara"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/arasaac_camara"
+            android:contentDescription="TODO"
+            app:layout_constraintBottom_toTopOf="@+id/buttonGuardarActividad"
+            app:layout_constraintEnd_toStartOf="@+id/buttonActividadImagenCamara"
+            app:layout_constraintHorizontal_bias="0.615"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/editTextCrearActividad"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_edit_text_height"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:hint="@string/actividad_insert_nombre"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/list_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/actividad_input_hora"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/actividad_input_hora"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_edit_text_height"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:gravity="center"
+            android:hint="@string/actividad_input_hora"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/list_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/crearActividadImagen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/buttonGuardarActividad"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_button_xl_height"
+            android:background="@drawable/button_ripple_primary"
+            android:text="@string/categoria_guardar"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/login_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
