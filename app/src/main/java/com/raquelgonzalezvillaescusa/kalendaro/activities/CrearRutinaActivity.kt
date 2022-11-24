@@ -36,9 +36,14 @@ class CrearRutinaActivity : AppCompatActivity() {
     private val REQUEST_CAMERA = 1002
     private lateinit var categoriaActual : String
     private var fechaString : String = ""
-    private var dia = "0"
-    private var mes = "0"
-    private var anio = "0"
+    private var dia = ""
+    private var mes = ""
+    private var anio = ""
+
+    private var diaFin = ""
+    private var mesFin = ""
+    private var anioFin = ""
+
     private var diaInt = 0
     private var mesInt = 0
     private var anioInt = 0
@@ -79,9 +84,9 @@ class CrearRutinaActivity : AppCompatActivity() {
             diaInt = fechaString.split(" ")[0].toInt();
             mesInt = convertStringMonthToInt(fechaString.split(" ")[1]);
             anioInt = fechaString.split(" ")[2].toInt();
-            onDateSelected(anioInt, mesInt+1, diaInt)
+            onDateInitSelected(anioInt, mesInt, diaInt)
             DatePickerFragment({anioInt, mesInt, diaInt ->
-                onDateSelected(anioInt, mesInt+1, diaInt)
+                onDateInitSelected(anioInt, mesInt, diaInt)
             })
 
         }
@@ -89,7 +94,8 @@ class CrearRutinaActivity : AppCompatActivity() {
         val iconImageInicial = getDrawable(R.drawable.arasaac_fotografia)
         crearRutinaImagen?.setImageDrawable(iconImageInicial)
 
-        rutinaInputFecha.setOnClickListener { showDatePickerDialog() }
+        rutinaInputFechaInicio.setOnClickListener { showDateInitPickerDialog() }
+        rutinaInputFechaFin.setOnClickListener { showDateFinPickerDialog() }
         buttonRutinaImagenGaleria.setOnClickListener{clickOnGaleria()}
         buttonRutinaImagenCamara.setOnClickListener{clickOnCamara()}
         buttonGuardarRutina.setOnClickListener {
@@ -108,13 +114,20 @@ class CrearRutinaActivity : AppCompatActivity() {
         }
     }
 
-    private fun showDatePickerDialog(){
+    private fun showDateInitPickerDialog(){
       val datePicker = DatePickerFragment({year, month, day ->
-          onDateSelected(year, month+1, day)
+          onDateInitSelected(year, month+1, day)
       })
         datePicker.show(supportFragmentManager, "datePicker")
     }
-    private fun onDateSelected(year: Int, month: Int, day: Int){
+
+    private fun showDateFinPickerDialog(){
+        val datePicker = DatePickerFragment({year, month, day ->
+            onDateFinSelected(year, month+1, day)
+        })
+        datePicker.show(supportFragmentManager, "datePicker")
+    }
+    private fun onDateInitSelected(year: Int, month: Int, day: Int){
         dia = day.toString()
         mes = month.toString()
         anio = year.toString()
@@ -122,7 +135,24 @@ class CrearRutinaActivity : AppCompatActivity() {
             dia = "0$dia"
         if(month < 10)
             mes = "0$mes"
-        rutinaInputFecha.setHint("$dia/$mes/$anio")
+        rutinaInputFechaInicio.setHint("$dia/$mes/$anio")
+        if(diaFin.isBlank() ||mesFin.isBlank() || anioFin.isBlank()){
+            diaFin = dia
+            mesFin = mes
+            anioFin = anio
+            rutinaInputFechaFin.setHint("$dia/$mes/$anio")
+        }
+    }
+
+    private fun onDateFinSelected(year: Int, month: Int, day: Int){
+        diaFin = day.toString()
+        mesFin = month.toString()
+        anioFin = year.toString()
+        if(day < 10)
+            diaFin = "0$diaFin"
+        if(month < 10)
+            mesFin = "0$mesFin"
+        rutinaInputFechaFin.setHint("$diaFin/$mesFin/$anioFin")
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -240,9 +270,11 @@ class CrearRutinaActivity : AppCompatActivity() {
                 toast("Error al guardar")
             }.addOnSuccessListener { taskSnapshot ->
                 toast("rutina guardada correctamente")
-                var crearRutinaHelper = CrearRutinaHelper(rutinaNombre, dia, mes, anio, DDMMMMYYYYFormatByYearMonthDay(
+                var crearRutinaHelper = CrearRutinaHelper(rutinaNombre, DDMMMMYYYYFormatByYearMonthDay(
                     Date(anio.toInt() - 1900, mes.toInt()-1, dia.toInt())
-                ))
+                ), DDMMMMYYYYFormatByYearMonthDay(
+                    Date(anioFin.toInt() - 1900, mesFin.toInt()-1, diaFin.toInt())))
+
                 reference.child(rutinaNombre).setValue(crearRutinaHelper)
                 //referenceDiaActual.child(rutinaNombre).setValue(crearRutinaHelper)
             }

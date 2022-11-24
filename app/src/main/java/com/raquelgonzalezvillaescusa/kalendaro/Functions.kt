@@ -29,6 +29,17 @@ fun Activity.displayBarActualView(): String {
     return dateString
 }
 
+/**
+ * Convertir la fecha alfabetica en numérica con el fin de situar las rutinas en el calendario
+ */
+fun Activity.ConvertDateBarViewToYYYYMMDD (fecha: String) : String{
+    var anioNumber = fecha.split(" ")[2]
+    var monthNumber = convertStringMonthToInt(fecha.split(" ")[1]);
+    var diaNumber = fecha.split(" ")[0]
+    var fechaNumber = "${anioNumber}${monthNumber}${diaNumber}"
+    return fechaNumber
+}
+
 fun Activity.displayCustomFace(faceNumber : Int) {
     when (faceNumber) {
         1 -> {
@@ -144,18 +155,18 @@ fun Activity.convertStringMonthToInt(mes: String) : Int{
     var fechaCompleta: String
     var nombreMes : Int
     when (mes) {
-        "enero" -> {nombreMes = 0}
-        "febrero" -> {nombreMes = 1}
-        "marzo" -> {nombreMes = 2}
-        "abril" -> {nombreMes = 3}
-        "mayo" -> {nombreMes = 4}
-        "junio" -> {nombreMes = 5}
-        "julio" -> {nombreMes = 6}
-        "agosto" -> {nombreMes = 7}
-        "septiembre" -> {nombreMes = 8}
-        "octubre" -> {nombreMes = 9}
-        "noviembre" -> {nombreMes = 10}
-        else-> {nombreMes = 11}
+        "enero" -> {nombreMes = 1}
+        "febrero" -> {nombreMes = 2}
+        "marzo" -> {nombreMes = 3}
+        "abril" -> {nombreMes = 4}
+        "mayo" -> {nombreMes = 5}
+        "junio" -> {nombreMes = 6}
+        "julio" -> {nombreMes = 7}
+        "agosto" -> {nombreMes = 8}
+        "septiembre" -> {nombreMes = 9}
+        "octubre" -> {nombreMes = 10}
+        "noviembre" -> {nombreMes = 11}
+        else-> {nombreMes = 12}
     }
     return nombreMes
 }

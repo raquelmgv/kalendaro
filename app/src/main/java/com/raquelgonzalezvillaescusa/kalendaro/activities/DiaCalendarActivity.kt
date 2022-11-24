@@ -113,6 +113,15 @@ class DiaCalendarActivity : AppCompatActivity() {
             var diaActHelper: DiaActualHelper = DiaActualHelper(fecha, faceNumber, comerState, banioState, dormirState)
             reference.child(fecha).setValue(diaActHelper)
         }
+
+        buttonCrearRutina.setOnClickListener {
+            intent = Intent(this@DiaCalendarActivity, CategoriasActivity::class.java)
+            var dato: String = fecha
+            val b: Bundle = Bundle()
+            b.putString("fechaString", dato)
+            intent.putExtras(b)
+            startActivity(intent)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -201,11 +210,24 @@ class DiaCalendarActivity : AppCompatActivity() {
                             if(rutinas.key.toString() == "rutinas"){
                                 for(rut in rutinas.children){
                                     val rutina = rut.key.toString()
-                                    for(i in rut.children){
-                                        if(i.key.toString() == "fecha" && i.value.toString() == fecha){
-                                            rutinasList.add(rutina)
-                                            categoriaCorrespondienteList.add(categoria)
+                                    var fechaInicioYYYYMMDD = "";
+                                    var fechaFinYYYYMMDD = "";
+                                    var fechaYYYYMMDDRutina = ConvertDateBarViewToYYYYMMDD(fecha)
+                                    for(i in rut.children) {
+                                        if (i.key.toString() == "fechaInicio") {
+                                            fechaInicioYYYYMMDD =
+                                                ConvertDateBarViewToYYYYMMDD(i.value.toString())
                                         }
+                                    }
+                                    for(i in rut.children){
+                                        if (i.key.toString() == "fechaFin"){
+                                            fechaFinYYYYMMDD = ConvertDateBarViewToYYYYMMDD(i.value.toString())
+                                        }
+                                    }
+                                    if(fechaYYYYMMDDRutina.compareTo(fechaInicioYYYYMMDD) >= 0 &&
+                                        fechaYYYYMMDDRutina.compareTo(fechaFinYYYYMMDD)<= 0){
+                                        rutinasList.add(rutina)
+                                        categoriaCorrespondienteList.add(categoria)
                                     }
                                 }
 

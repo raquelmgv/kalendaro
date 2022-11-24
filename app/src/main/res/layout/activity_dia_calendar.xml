@@ -81,7 +81,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:layout_height="120dp"
-            app:layout_constraintBottom_toTopOf="@id/conceptualMenuIconsBar"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCrearRutina"
             tools:ignore="MissingConstraints">
 
             <Button
@@ -108,6 +108,19 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/diaactual_arasaac_dormir"></Button>
         </LinearLayout>
+        <Button
+            android:id="@+id/buttonCrearRutina"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_button_xl_height"
+            android:background="@drawable/button_ripple_bg"
+            android:text="@string/menu_crear_rutina_hoy"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/login_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/conceptualMenuIconsBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/conceptualMenuIconsBar"

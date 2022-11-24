@@ -113,7 +113,7 @@ class DiaActual : AppCompatActivity() {
             reference.child(fecha).setValue(diaActHelper)
         }
 
-        /*Si pasamos la fecha a la pagina de creación de rutinas, significa que se pondra por defecto en la actividad la fecha y la hora del dia en el que estamos*/
+        /* Se pondra por defecto en la actividad la fecha del dia del calendario en el que se está*/
         buttonCrearRutina.setOnClickListener {
             if(!fecha.isBlank()) {
                 intent = Intent(this@DiaActual, CategoriasActivity::class.java)
