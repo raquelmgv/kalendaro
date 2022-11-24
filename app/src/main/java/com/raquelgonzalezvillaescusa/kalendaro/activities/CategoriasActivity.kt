@@ -31,8 +31,7 @@ class CategoriasActivity : AppCompatActivity() {
     private lateinit var bundle: Bundle
     private lateinit var rootNode : FirebaseDatabase
     private lateinit var reference : DatabaseReference
-    private lateinit var actividadesReference: DatabaseReference
-    private lateinit var fechaString : String
+    private var fechaString : String = ""
 
     private lateinit var categoriasRutinasList: MutableList<String>
 
@@ -48,9 +47,10 @@ class CategoriasActivity : AppCompatActivity() {
         setUpToolbar(toolbar)
         displayConceptualMenu()
 
-        bundle = intent.extras
-        fechaString = bundle.getString("fechaString")
-
+        if(intent !== null && intent.extras !== null){
+            bundle = intent.extras
+            fechaString = bundle.getString("fechaString")
+        }
 
         rootNode = FirebaseDatabase.getInstance()
         reference = FirebaseDatabase.getInstance().getReference("$currentUser/categoriasRutinaData")
@@ -111,7 +111,9 @@ class CategoriasActivity : AppCompatActivity() {
                         var dato: String = catName
                         val b: Bundle = Bundle()
                         b.putString("categoria", dato)
-                        b.putString("fechaString", fechaString)
+                        if(!fechaString.isBlank()){
+                            b.putString("fechaString", fechaString)
+                        }
                         intent.putExtras(b)
                         startActivity(intent)
                     }

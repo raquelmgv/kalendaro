@@ -115,12 +115,15 @@ class DiaActual : AppCompatActivity() {
 
         /*Si pasamos la fecha a la pagina de creación de rutinas, significa que se pondra por defecto en la actividad la fecha y la hora del dia en el que estamos*/
         buttonCrearRutina.setOnClickListener {
-            intent = Intent(this@DiaActual, CategoriasActivity::class.java)
-            var dato: String = fecha
-            val b: Bundle = Bundle()
-            b.putString("fechaString", dato)
-            intent.putExtras(b)
-            startActivity(intent)
+            if(!fecha.isBlank()) {
+                intent = Intent(this@DiaActual, CategoriasActivity::class.java)
+                val b: Bundle = Bundle()
+                b.putString("fechaString", fecha)
+                intent.putExtras(b)
+                startActivity(intent)
+            }else{
+                goToActivity<CategoriasActivity>()
+            }
         }
 
     }

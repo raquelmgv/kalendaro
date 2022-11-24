@@ -35,7 +35,7 @@ class CrearRutinaActivity : AppCompatActivity() {
     private val REQUEST_GALLERY = 1001 //cualquier numero distinto de -1 quiere decir que si tiene permiso
     private val REQUEST_CAMERA = 1002
     private lateinit var categoriaActual : String
-    private lateinit var fechaString : String
+    private var fechaString : String = ""
     private var dia = "0"
     private var mes = "0"
     private var anio = "0"
@@ -59,11 +59,13 @@ class CrearRutinaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_crear_rutina)
         toolbar = findViewById(R.id.toolbar)
         setUpToolbar(toolbar)
-
-        bundle = intent.extras
-        categoriaActual = bundle.getString("categoria")
-        fechaString = bundle.getString("fechaString")
-
+        if(intent !== null && intent.extras !== null) {
+            bundle = intent.extras
+            categoriaActual = bundle.getString("categoria")
+            if(bundle.getString("fechaString")!== null){
+                fechaString = bundle.getString("fechaString");
+            }
+        }
         rootNode = FirebaseDatabase.getInstance()
         reference = rootNode.getReference("$currentUser/categoriasRutinaData/$categoriaActual/rutinas")
         //referenceDiaActual = rootNode.getReference("$currentUser/diaActualData/rutinas")
@@ -73,7 +75,7 @@ class CrearRutinaActivity : AppCompatActivity() {
         storage = FirebaseStorage.getInstance()
         storageReference = storage!!.reference
 
-        if(fechaString != null){
+        if(!fechaString.isBlank()){
             diaInt = fechaString.split(" ")[0].toInt();
             mesInt = convertStringMonthToInt(fechaString.split(" ")[1]);
             anioInt = fechaString.split(" ")[2].toInt();

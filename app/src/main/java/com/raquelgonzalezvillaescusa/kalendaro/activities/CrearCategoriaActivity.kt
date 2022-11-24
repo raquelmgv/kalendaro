@@ -36,7 +36,7 @@ class CrearCategoriaActivity : AppCompatActivity() {
     private val REQUEST_GALLERY = 1001 //cualquier numero distinto de -1 quiere decir que si tiene permiso
     private val REQUEST_CAMERA = 1002
 
-    private lateinit var fechaString : String
+    private var fechaString : String = ""
     private lateinit var rootNode : FirebaseDatabase
     private lateinit var reference : DatabaseReference
     private lateinit var bundle: Bundle
@@ -54,9 +54,10 @@ class CrearCategoriaActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setUpToolbar(toolbar)
 
-        bundle = intent.extras
-        fechaString = bundle.getString("fechaString")
-
+        if(intent !== null && intent.extras !== null) {
+            bundle = intent.extras
+            fechaString = bundle.getString("fechaString")
+        }
         rootNode = FirebaseDatabase.getInstance()
         reference = rootNode.getReference("$currentUser/categoriasRutinaData")
 
@@ -75,12 +76,14 @@ class CrearCategoriaActivity : AppCompatActivity() {
                 editTextCrearCategoria.error = "El nombre puede contener únicamente letras o numeros hasta 20 caracteres"
             }else {
                 guardarDatosDB(editTextCrearCategoria.text.toString())
-                intent = Intent(this@CrearCategoriaActivity, CategoriasActivity::class.java)
-                var dato: String = fechaString
-                val b: Bundle = Bundle()
-                b.putString("fechaString", dato)
-                intent.putExtras(b)
-                startActivity(intent)
+                if(!fechaString.isBlank()) {
+                    intent = Intent(this@CrearCategoriaActivity, CategoriasActivity::class.java)
+                    val b: Bundle = Bundle()
+                    b.putString("fechaString", fechaString)
+                    intent.putExtras(b)
+                    startActivity(intent)
+                }
+                goToActivity<CategoriasActivity>()
             }
         }
     }

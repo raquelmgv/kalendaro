@@ -32,7 +32,7 @@ class RutinasActivity : AppCompatActivity() {
     private lateinit var bundle : Bundle
     private lateinit var categoriaSeleccionada : String
     private lateinit var rutinasList: MutableList<String>
-    private lateinit var fechaString : String
+    private var fechaString : String = ""
 
     private lateinit var rootNode : FirebaseDatabase
     private lateinit var reference : DatabaseReference
@@ -49,11 +49,13 @@ class RutinasActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setUpToolbar(toolbar)
         displayConceptualMenu()
-
-        bundle = intent.extras
-        categoriaSeleccionada = bundle.getString("categoria")
-        fechaString = bundle.getString("fechaString")
-
+        if(intent !== null && intent.extras !== null) {
+            bundle = intent.extras
+            categoriaSeleccionada = bundle.getString("categoria")
+            if(bundle.getString("fechaString")!== null){
+                fechaString = bundle.getString("fechaString");
+            }
+        }
         displayBarActualView()
         reference = FirebaseDatabase.getInstance().getReference("$currentUser/categoriasRutinaData/$categoriaSeleccionada/rutinas")
         /*2*/
@@ -68,7 +70,9 @@ class RutinasActivity : AppCompatActivity() {
             var dato: String = categoriaSeleccionada
             val b: Bundle = Bundle()
             b.putString("categoria", dato)
-            b.putString("fechaString", fechaString)
+            if(!fechaString.isBlank()) {
+                b.putString("fechaString", fechaString)
+            }
             intent.putExtras(b)
             startActivity(intent)
         }
