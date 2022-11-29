@@ -5,10 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.AdapterView
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_dia_actual.*
 import com.google.firebase.storage.StorageReference
+import com.raquelgonzalezvillaescusa.kalendaro.activities.ActividadesActivity
+import com.raquelgonzalezvillaescusa.kalendaro.activities.ListViewRutinasEspecificasAdapter
 import com.raquelgonzalezvillaescusa.kalendaro.activities.RutinasActivity
 import kotlinx.android.synthetic.main.popup_delete_item.view.*
 import java.text.SimpleDateFormat
@@ -117,6 +120,75 @@ fun Activity.displayCustomDormir(dormirState : Int) {
     }
 }
 
+fun Activity.getRutinasDiaCorrespondiente(rootNode : FirebaseDatabase, storageReference: StorageReference?,
+                                          currentUser: String, referenceCategorias : DatabaseReference,
+                                          mContext: Context, fecha : String){
+    var rutinasList: MutableList<String>
+    var categoriaCorrespondienteList: MutableList<String>
+    rutinasList = mutableListOf()
+    categoriaCorrespondienteList = mutableListOf()
+    referenceCategorias.addValueEventListener(object: ValueEventListener {
+        override fun onCancelled(error: DatabaseError) {}
+        override fun onDataChange(snapshot: DataSnapshot) {
+            if(snapshot.exists()){
+                rutinasList.clear()
+                categoriaCorrespondienteList.clear()
+                for (cat in snapshot.children){
+                    val categoria = cat.key.toString()
+                    for (rutinas in cat.children){
+                        if(rutinas.key.toString() == "rutinas"){
+                            for(rut in rutinas.children){
+                                val rutina = rut.key.toString()
+                                var fechaInicioYYYYMMDD = "";
+                                var fechaFinYYYYMMDD = "";
+                                var fechaYYYYMMDDRutina = ConvertDateBarViewToYYYYMMDD(fecha)
+                                for(i in rut.children) {
+                                    if (i.key.toString() == "fechaInicio") {
+                                        fechaInicioYYYYMMDD =
+                                            ConvertDateBarViewToYYYYMMDD(i.value.toString())
+                                    }
+                                }
+                                for(i in rut.children){
+                                    if (i.key.toString() == "fechaFin"){
+                                        fechaFinYYYYMMDD = ConvertDateBarViewToYYYYMMDD(i.value.toString())
+                                    }
+                                }
+                                if(fechaYYYYMMDDRutina.compareTo(fechaInicioYYYYMMDD) >= 0 &&
+                                    fechaYYYYMMDDRutina.compareTo(fechaFinYYYYMMDD)<= 0){
+                                    rutinasList.add(rutina)
+                                    categoriaCorrespondienteList.add(categoria)
+                                }
+                            }
+
+                        }
+                    }
+                }
+                var adaptador = ListViewRutinasEspecificasAdapter(applicationContext, rutinasList, categoriaCorrespondienteList)
+                rutinasListView.adapter = adaptador
+                rutinasListView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
+                    val rutName = rutinasList.get(i)
+                    val catName = categoriaCorrespondienteList.get(i)
+                    intent = Intent(mContext, ActividadesActivity::class.java)
+                    val b: Bundle = Bundle()
+                    b.putString("nombreRutinaCreada", rutName)
+                    b.putString("categoria", catName)
+                    intent.putExtras(b)
+                    startActivity(intent)
+                }
+                rutinasListView.onItemLongClickListener = AdapterView.OnItemLongClickListener { adapterView, view, i, l ->
+                    var referenceRutina : DatabaseReference
+                    val rutName = rutinasList.get(i)
+                    val catName = categoriaCorrespondienteList.get(i)
+                    referenceRutina = rootNode.getReference("$currentUser/categoriasRutinaData/$catName/rutinas/rut_$rutName")
+                    showRutinaDeleteView(mContext, rootNode, storageReference, rutName, currentUser,  catName, referenceRutina);
+
+                    true
+                }
+            }
+        }
+    })
+
+}
 
 fun Activity.deleteActivitiesDirectoryStorage(rootNode : FirebaseDatabase, storageReference: StorageReference?,
                                                  rutName: String, currentUser: String, selectedCategory: String){
