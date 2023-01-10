@@ -33,6 +33,7 @@ TODO Cosas a corregir
     - Foto
 
 - Redirigir la galeria a un album solo de fotos TFG
+- Marcar los días del calendario donde hay rutinas creadas (haciendo otro objeto json de fechas solo para inicializar el calendario)
 
 *******P8*********
 -TESTS CAJA NEGRA ETC (junit o tests con firebase)

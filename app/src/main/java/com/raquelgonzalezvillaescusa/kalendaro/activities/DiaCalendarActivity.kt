@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.AdapterView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -66,7 +65,7 @@ class DiaCalendarActivity : AppCompatActivity() {
 
         getFaceNumberDB()
         getDailiesDB()
-        getRutinasDB()
+        getRutinasDiaCorrespondiente(rootNode, storageReference, currentUser, referenceCategorias,this@DiaCalendarActivity, fecha);
 
         customButton_feliz.setOnClickListener{
             if (faceNumber == 1){ faceNumber = 0 } else{ faceNumber = 1}
@@ -194,74 +193,7 @@ class DiaCalendarActivity : AppCompatActivity() {
         })
     }
 
-
-    private fun getRutinasDB(){
-        rutinasList = mutableListOf()
-        categoriaCorrespondienteList = mutableListOf()
-        referenceCategorias.addValueEventListener(object: ValueEventListener {
-            override fun onCancelled(error: DatabaseError) {}
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                    rutinasList.clear()
-                    categoriaCorrespondienteList.clear()
-                    for (cat in snapshot.children){
-                        val categoria = cat.key.toString()
-                        for (rutinas in cat.children){
-                            if(rutinas.key.toString() == "rutinas"){
-                                for(rut in rutinas.children){
-                                    val rutina = rut.key.toString()
-                                    var fechaInicioYYYYMMDD = "";
-                                    var fechaFinYYYYMMDD = "";
-                                    var fechaYYYYMMDDRutina = ConvertDateBarViewToYYYYMMDD(fecha)
-                                    for(i in rut.children) {
-                                        if (i.key.toString() == "fechaInicio") {
-                                            fechaInicioYYYYMMDD =
-                                                ConvertDateBarViewToYYYYMMDD(i.value.toString())
-                                        }
-                                    }
-                                    for(i in rut.children){
-                                        if (i.key.toString() == "fechaFin"){
-                                            fechaFinYYYYMMDD = ConvertDateBarViewToYYYYMMDD(i.value.toString())
-                                        }
-                                    }
-                                    if(fechaYYYYMMDDRutina.compareTo(fechaInicioYYYYMMDD) >= 0 &&
-                                        fechaYYYYMMDDRutina.compareTo(fechaFinYYYYMMDD)<= 0){
-                                        rutinasList.add(rutina)
-                                        categoriaCorrespondienteList.add(categoria)
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-                    var adaptador = ListViewRutinasEspecificasAdapter(applicationContext, rutinasList, categoriaCorrespondienteList)
-                    rutinasListView.adapter = adaptador
-                    rutinasListView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
-                        val rutName = rutinasList.get(i)
-                        val catName = categoriaCorrespondienteList.get(i)
-                        intent = Intent(this@DiaCalendarActivity, ActividadesActivity::class.java)
-                        val b: Bundle = Bundle()
-                        b.putString("nombreRutinaCreada", rutName)
-                        b.putString("categoria", catName)
-                        intent.putExtras(b)
-                        startActivity(intent)
-                    }
-                    rutinasListView.onItemLongClickListener = AdapterView.OnItemLongClickListener { adapterView, view, i, l ->
-                        var referenceRutina : DatabaseReference
-                        val rutName = rutinasList.get(i)
-                        val catName = categoriaCorrespondienteList.get(i)
-                        referenceRutina = rootNode.getReference("$currentUser/categoriasRutinaData/$catName/rutinas/rut_$rutName")
-                        showRutinaDeleteView(this@DiaCalendarActivity, rootNode, storageReference, rutName, currentUser,  catName, referenceRutina);
-
-                        true
-                    }
-                }
-            }
-        })
-
-    }
-
-    public override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater.inflate(R.menu.menu, menu)
 /*        val item_categoria: MenuItem = menu.findItem(R.id.crearCategoria) as MenuItem
         item_categoria.setVisible(false)*/
