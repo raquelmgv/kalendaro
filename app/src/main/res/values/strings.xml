@@ -23,6 +23,7 @@
     <string name="menu_configuracion">Configuración</string>
     <string name="menu_editar_perfil">Editar Perfil</string>
     <string name="menu_log_out">Cerrar Sesión</string>
+    <string name="menu_graficas">Gráficas</string>
     <!--Crear Categoria-->
     <string name="categoria_insert_nombre">Nombre de la categoría</string>
     <string name="categoria_buscar_galeria">GALERÍA</string>
@@ -59,5 +60,9 @@
     <string name="dialog_delete_cat">"Al eliminar la categoría seleccionada\nse eliminarán también las rutinas que contiene."</string>
     <string name="dialog_delete_rut">"Al eliminar la rutina seleccionada\nse eliminarán también las actividades que contiene."</string>
     <string name="dialog_delete_act">"Se eliminará la actividad seleccionada."</string>
+
+    <!--Graficas-->
+    <string name="grafica_estados_animo">GRAFICA DE LOS ESTADOS DE ANIMO ALMACENADOS</string>
+
 
 </resources>

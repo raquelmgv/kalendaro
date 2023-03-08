@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
 /*
 TODO Cosas a corregir
 * No se pueden poner imágenes que sean PNG IMPORTANTE.
-
 *******P0*********
 ---- OK -----
 - Crear en dia actual la opcion de añadir rutina (que lleve a categorias-> rutinas-> actividad (fecha por defecto la de hoy))--- OKIII (testear bien)
@@ -42,3 +41,7 @@ TODO Cosas a corregir
 - (No muy importante, ya que funciona el boton de atras del movil) Rutas boton back (del calendario vuelve siempre al dia actual, debe volver a donde viene)
 -
 * */
+
+
+/**ERRORES IMPORTANTES**/
+/*Si no me reconoce el código hago file-> sync project with gradle files*/

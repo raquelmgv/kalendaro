@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.AdapterView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -20,7 +19,6 @@ import com.raquelgonzalezvillaescusa.kalendaro.R
 import kotlinx.android.synthetic.main.activity_dia_actual.*
 import kotlinx.android.synthetic.main.activity_dia_actual.buttonCrearRutina
 import kotlinx.android.synthetic.main.activity_dia_actual.conceptualMenuIconsBar
-import kotlinx.android.synthetic.main.activity_dia_actual.rutinasListView
 
 
 
@@ -208,6 +206,7 @@ class DiaActual : AppCompatActivity() {
         when(item?.itemId) {
             R.id.editarPerfil -> goToActivity<EditarPerfilActivity> {}
             R.id.logOut -> goToActivity<LoginActivity> {}
+            R.id.graficas -> goToActivity<GraficasActivity> {}
         }
         return super.onOptionsItemSelected(item);
     }

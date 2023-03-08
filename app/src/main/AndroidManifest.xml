@@ -29,6 +29,7 @@
         <activity android:name=".activities.CategoriasActivity"
             android:parentActivityName=".activities.DiaActual"/>
         <activity android:name=".activities.EditarPerfilActivity" />
+        <activity android:name=".activities.GraficasActivity" />
         <activity android:name=".activities.RutinasActivity"
             android:parentActivityName=".activities.CategoriasActivity" />
         <activity android:name=".activities.CalendarActivity"
