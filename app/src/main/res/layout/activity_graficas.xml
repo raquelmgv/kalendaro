@@ -50,49 +50,15 @@
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graficaEstadosAnimo"
-            android:layout_width="353dp"
-            android:layout_height="374dp"
+            android:layout_width="403dp"
+            android:layout_height="489dp"
 
+            android:layout_marginTop="12dp"
             app:layout_constraintBottom_toTopOf="@+id/barFaces"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TituloText"
             tools:ignore="MissingConstraints" />
-
-        <LinearLayout
-            android:id="@+id/barFaces"
-            android:layout_width="333dp"
-            android:layout_height="81dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/graficaEstadosAnimo"
-            tools:ignore="MissingConstraints">
-
-            <ImageView
-                android:id="@+id/customButton_feliz"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/boton_cara_feliz"></ImageView>
-
-            <ImageView
-                android:id="@+id/customButton_normal"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/boton_cara_normal"></ImageView>
-
-            <ImageView
-                android:id="@+id/customButton_triste"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/boton_cara_triste"></ImageView>
-        </LinearLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/conceptualMenuIconsBar"
