@@ -1,19 +1,28 @@
 package com.raquelgonzalezvillaescusa.kalendaro
 
+import Data.DiaActualHelper
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.AdapterView
 import androidx.appcompat.app.AlertDialog
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_dia_actual.*
 import com.google.firebase.storage.StorageReference
+import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.series.LineGraphSeries
 import com.raquelgonzalezvillaescusa.kalendaro.activities.ActividadesActivity
+import com.raquelgonzalezvillaescusa.kalendaro.activities.GraficasActivity
 import com.raquelgonzalezvillaescusa.kalendaro.activities.ListViewRutinasEspecificasAdapter
 import com.raquelgonzalezvillaescusa.kalendaro.activities.RutinasActivity
 import kotlinx.android.synthetic.main.popup_delete_item.view.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -224,7 +233,6 @@ fun Activity.reloadActivity(context: Context, data: String?, putStringId: String
 }
 
 fun Activity.convertStringMonthToInt(mes: String) : Int{
-    var fechaCompleta: String
     var nombreMes : Int
     when (mes) {
         "enero" -> {nombreMes = 1}
@@ -265,6 +273,67 @@ fun Activity.showRutinaDeleteView(mContext: Context, rootNode : FirebaseDatabase
         mAlertDialog.dismiss()
         reloadActivity(mContext, null, null)
     }
+}
+
+fun Activity.convertStringDateToStringNumber(fecha: String) : String{
+    var arrayFecha = fecha.split(" ");
+    var dia= arrayFecha.get(0)
+    var mes = arrayFecha.get(1)
+    var anio = arrayFecha.get(2)
+    var nombreMes : String
+    when (mes) {
+        "enero" -> {nombreMes = "01"}
+        "febrero" -> {nombreMes = "02"}
+        "marzo" -> {nombreMes = "03"}
+        "abril" -> {nombreMes = "04"}
+        "mayo" -> {nombreMes = "05"}
+        "junio" -> {nombreMes = "06"}
+        "julio" -> {nombreMes = "07"}
+        "agosto" -> {nombreMes = "08"}
+        "septiembre" -> {nombreMes = "09"}
+        "octubre" -> {nombreMes = "10"}
+        "noviembre" -> {nombreMes = "11"}
+        else-> {nombreMes = "12"}
+    }
+    return "$anio"+"$nombreMes"+"$dia"
+}
 
 
+/*fun Activity.getDataPoints(): List<DataPoint>{
+    var faceNumber: Double
+    var dataPointLsit : MutableList<DataPoint>
+    dataPointLsit = mutableListOf()
+    val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance()}
+    var currentUser : String = mAuth.uid.toString()
+    val rootNode = FirebaseDatabase.getInstance()
+    lateinit var reference : DatabaseReference
+    reference = rootNode.getReference("$currentUser/diaActualData")
+
+    reference.addValueEventListener(object: ValueEventListener {
+        override fun onCancelled(error: DatabaseError) {}
+        override fun onDataChange(snapshot: DataSnapshot) {
+            if (snapshot.exists()) {
+                for (datosDiaActualData in snapshot.children) {
+                    val date = convertStringDateToStringNumber(datosDiaActualData.key.toString())
+                    for(datosDia in datosDiaActualData.children){
+                        faceNumber = 0.0;
+                        if (datosDia.key.toString() == "faceNumber") {
+                            faceNumber = datosDia.value.toString().toDouble()
+                            dataPointLsit.add(DataPoint(date.toDouble(), faceNumber))
+                        }
+
+                    }
+                }
+            }
+        }
+    })
+    return dataPointLsit
+}*/
+
+fun Activity.getXValuesFromDataPoints(dataPoints: Array<DataPoint>): List<Double> {
+    val xValues = mutableListOf<Double>()
+    for (dataPoint in dataPoints) {
+        xValues.add(dataPoint.x)
+    }
+    return xValues
 }

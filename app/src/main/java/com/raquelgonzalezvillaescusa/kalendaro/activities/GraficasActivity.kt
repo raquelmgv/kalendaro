@@ -4,16 +4,19 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
-import com.raquelgonzalezvillaescusa.kalendaro.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.helper.StaticLabelsFormatter
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
+import com.raquelgonzalezvillaescusa.kalendaro.*
+import com.raquelgonzalezvillaescusa.kalendaro.R
 
 
 class GraficasActivity : AppCompatActivity() {
     private lateinit var series: LineGraphSeries<DataPoint>
-    private var puntos = mutableListOf<DataPoint>()
+    private var dataPointLsit = mutableListOf<DataPoint>()
     private lateinit var grafica: GraphView
     enum class ZoomLevel {
         NO_ZOOM,
@@ -40,40 +43,14 @@ class GraficasActivity : AppCompatActivity() {
     }
 
     fun makeGraph() {
-        setLabels ()
-        //Segun el zoom tendremos vista en años, meses o dias
-        if(getCurrentZoom().equals(ZoomLevel.DAY_ZOOM)){
-            // TODO: Buscamos los dias que hay contestados en la bdd
-            val dias = listOf(1,2,3,4,5,6,7,8,9,10)
-            //TODO: fin todo
-            for (dia in dias){
-            puntos.add(DataPoint(dia.toDouble(), getMediaEstadoDeAnimoDay()))
-            }
-        }else if(getCurrentZoom().equals(ZoomLevel.MONTH_ZOOM)){
-
-            // TODO: Buscamos los dias de cada mes que hay contestados en la bdd
-            val meses = listOf(3,4,5,6,7)
-            //TODO: fin todo
-            for (mes in meses){
-                puntos.add(DataPoint(mes.toDouble(), getMediaEstadoDeAnimoMonth()))
-            }
-        }else{
-            // TODO: Buscamos los anios que hay contestados en la bdd
-            val anios = listOf(2022.toDouble(), 2023.toDouble())
-            //TODO: fin todo
-            for (anio in anios){
-               puntos.add(DataPoint(anio, getMediaEstadoDeAnimoYear()))
-            }
-
-        }
-        series = LineGraphSeries(puntos.toTypedArray())
-        series.color = Color.parseColor("#8B00FF")
+        setLabels()
         // Configurar la gráfica
         grafica.addSeries(series)
         grafica.viewport.isScalable = true
         grafica.viewport.isXAxisBoundsManual = true
         grafica.viewport.isYAxisBoundsManual = true
         grafica.gridLabelRenderer.numVerticalLabels = 3
+        grafica.gridLabelRenderer.numHorizontalLabels = dataPointLsit.size
         grafica.gridLabelRenderer.horizontalAxisTitle = "Tiempo"
         grafica.gridLabelRenderer.verticalAxisTitle = "Estado de ánimo"
         grafica.gridLabelRenderer.padding = 100
@@ -82,28 +59,81 @@ class GraficasActivity : AppCompatActivity() {
 
     }
 
+    /*Cambiamos los labels de la gráfica*/
     private fun setLabels () {
-        val estadosAnimo = arrayOf( "Triste", "Normal", "Contento")
-        val anios = arrayOf( "2021", "2022", "2023")
-        val meses = arrayOf( "Enero", "Febrero", "Marzo")
-        val dias = arrayOf( "27", "28", "31")
-
+        addDataPoints()
+        val estadosAnimo = arrayOf("Triste", "Normal", "Contento")
         val staticLabelsFormatter = StaticLabelsFormatter(grafica)
         staticLabelsFormatter.setVerticalLabels(
             estadosAnimo
         )
-
         staticLabelsFormatter.setHorizontalLabels(
             when {
-                ZoomLevel.YEAR_ZOOM.equals(getCurrentZoom()) -> anios
-                ZoomLevel.MONTH_ZOOM.equals(getCurrentZoom()) -> meses
-                else -> dias
+                ZoomLevel.YEAR_ZOOM.equals(getCurrentZoom()) -> setLabelsXZoom("Y").toTypedArray()
+                ZoomLevel.MONTH_ZOOM.equals(getCurrentZoom()) -> setLabelsXZoom("M").toTypedArray()
+                else -> setLabelsXZoom("D").toTypedArray()
             }
         )
-
         grafica.gridLabelRenderer.labelFormatter = staticLabelsFormatter
         grafica.gridLabelRenderer.setHorizontalLabelsAngle(90)
         grafica.gridLabelRenderer.labelVerticalWidth = 100
+    }
+
+    private fun setLabelsXZoom(typeDate: String) : List<String> {
+        //Convierte las labels de vista año en string para mostrarlas
+        // typeDate: Y -> anios, M-> meses, else-> dias
+        var arrayDatapointX  : List<Double> = getXValuesFromDataPoints(dataPointLsit.toTypedArray())
+        lateinit var arrayYears : MutableList<String>
+        arrayYears = mutableListOf() // inicialización de la lista vacía
+        for (dataPointX: Double in arrayDatapointX){
+            when (typeDate){
+                "Y" -> arrayYears.add(dataPointX.toString().substring(0,5))
+                "M" -> arrayYears.add(dataPointX.toString().substring(5,7))
+                else -> arrayYears.add(dataPointX.toString().substring(7,9))
+            }
+        }
+
+        if(arrayYears.isNullOrEmpty()){
+          arrayYears.add(" ")
+        }
+        if (arrayYears.size < 2) {
+            // Agrega etiquetas por defecto
+            arrayYears.add(" ")
+        }
+        return arrayYears
+    }
+
+    private fun addDataPoints(){
+        var faceNumber: Double
+        val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance()}
+        var currentUser : String = mAuth.uid.toString()
+        val rootNode = FirebaseDatabase.getInstance()
+        lateinit var reference : DatabaseReference
+        reference = rootNode.getReference("$currentUser/diaActualData")
+
+
+        reference.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {}
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    dataPointLsit.clear()
+                    for (datosDiaActualData in snapshot.children) {
+                        val date = convertStringDateToStringNumber(datosDiaActualData.key.toString()).toInt()
+                        for(datosDia in datosDiaActualData.children){
+                            faceNumber = 0.0;
+                            if (datosDia.key.toString() == "faceNumber") {
+                                faceNumber = datosDia.value.toString().toDouble()
+                                dataPointLsit.add(DataPoint(date.toDouble(), faceNumber))
+                            }
+
+                        }
+                    }
+                }
+            }
+        })
+        series = LineGraphSeries(dataPointLsit.toTypedArray())
+        series.color = Color.parseColor("#8B00FF")
+        grafica.addSeries(series)
     }
 
     private fun getCurrentZoom(): ZoomLevel {
@@ -122,25 +152,4 @@ class GraficasActivity : AppCompatActivity() {
             else -> ZoomLevel.NO_ZOOM
         }
     }
-
-    /*TODO: Hacer la busqueda en la bdd*/
-    private fun getMediaEstadoDeAnimoYear(): Double{
-    //Calculamos la media de estados de animo del año entre 1, 2, y 3 estados
-        //TODO: buscar en bdd:
-        var estados = arrayOf(1,1,1,2,3,3,2,2,3)
-        return estados.average();
-    }
-
-    private fun getMediaEstadoDeAnimoMonth(): Double{
-        //TODO: buscar en bdd:
-        var estados = arrayOf(1,1,1,2,3,2,2,3)
-        return estados.average();
-    }
-
-    private fun getMediaEstadoDeAnimoDay(): Double{
-        //TODO: buscar en bdd:
-        return 3.toDouble();
-    }
-
-
 }
