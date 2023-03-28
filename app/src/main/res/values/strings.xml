@@ -62,7 +62,11 @@
     <string name="dialog_delete_act">"Se eliminará la actividad seleccionada."</string>
 
     <!--Graficas-->
-    <string name="grafica_estados_animo">GRAFICA DE LOS ESTADOS DE ANIMO ALMACENADOS</string>
-
+    <string name="graficas">Gráficas</string>
+    <string name="graficas_estados_animo">Estados de ánimo</string>
+    <string name="grafica_estados_animo">GRAFICA DE LOS ESTADOS DE ÁNIMO </string>
+    <string name="grafica_estados_animo_anios">GRAFICA DE LOS ESTADOS DE ÁNIMO ALMACENADOS DURANTE LOS ULTIMOS AÑOS</string>
+    <string name="grafica_estados_animo_meses_anio">GRAFICA DE LOS ESTADOS DE ÁNIMO DURANTE EL AÑO ACTUAL</string>
+    <string name="grafica_estados_animo_dias_mes">GRAFICA DE LOS ESTADOS DE ÁNIMO DURANTE EL MES ACTUAL</string>
 
 </resources>

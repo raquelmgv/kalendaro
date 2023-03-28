@@ -243,6 +243,43 @@ fun Activity.convertStringMonthToInt(mes: String) : Int{
     return nombreMes
 }
 
+fun Activity.convertDateToString(fecha: String) : String{
+    var arrayFecha = fecha.split(" ");
+    var dia= arrayFecha.get(0)
+    var mes = arrayFecha.get(1)
+    var anio = arrayFecha.get(2)
+    var numeroMes : String
+    when (mes) {
+        "enero" -> {numeroMes = "01"}
+        "febrero" -> {numeroMes = "02"}
+        "marzo" -> {numeroMes = "03"}
+        "abril" -> {numeroMes = "04"}
+        "mayo" -> {numeroMes = "05"}
+        "junio" -> {numeroMes = "06"}
+        "julio" -> {numeroMes = "07"}
+        "agosto" -> {numeroMes = "08"}
+        "septiembre" -> {numeroMes = "09"}
+        "octubre" -> {numeroMes = "10"}
+        "noviembre" -> {numeroMes = "11"}
+        else-> {numeroMes = "12"}
+    }
+    return "$anio"+"$numeroMes"+"$dia"
+}
+
+fun Activity.numeroDiasMesActual() : Int{
+    val calendar = Calendar.getInstance()
+    return calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+}
+
+ fun Activity.mesActual(): String  {
+    val calendar = Calendar.getInstance()
+    var currentMonth = calendar.get(Calendar.MONTH) + 1
+    if(currentMonth < 10){
+        return "0" + currentMonth.toString()
+    }
+    return currentMonth.toString();
+}
+
 fun Activity.showRutinaDeleteView(mContext: Context, rootNode : FirebaseDatabase, storageReference: StorageReference?,
                             rutName: String, currentUser: String, catName: String, reference: DatabaseReference) {
     val mDialogView = LayoutInflater.from(mContext).inflate(R.layout.popup_delete_item, null)
@@ -265,6 +302,5 @@ fun Activity.showRutinaDeleteView(mContext: Context, rootNode : FirebaseDatabase
         mAlertDialog.dismiss()
         reloadActivity(mContext, null, null)
     }
-
 
 }
