@@ -26,6 +26,14 @@ fun Activity.displayBarActualView(): String {
     return dateString
 }
 
+fun Activity.displayDateMMyyyy(): String {
+    val date = System.currentTimeMillis()
+    val sdf = SimpleDateFormat("MMMM yyyy")
+    val dateString: String = sdf.format(date)
+    barActualView.setText(dateString)
+    return dateString
+}
+
  fun Activity.DDMMMMYYYYFormatByYearMonthDay (date: Date) : String{
     val sdf = SimpleDateFormat("dd MMMM yyyy")
     val dateString: String = sdf.format(date)
@@ -45,7 +53,7 @@ fun Activity.ConvertDateBarViewToYYYYMMDD (fecha: String) : String{
 
 fun Activity.displayCustomFace(faceNumber : Int) {
     when (faceNumber) {
-        1 -> {
+        3 -> {
             customButton_feliz.setBackgroundResource(R.drawable.boton_cara_feliz_pulsado)
             customButton_normal.setBackgroundResource(R.drawable.boton_cara_normal)
             customButton_triste.setBackgroundResource(R.drawable.boton_cara_triste)
@@ -56,7 +64,7 @@ fun Activity.displayCustomFace(faceNumber : Int) {
             customButton_feliz.setBackgroundResource(R.drawable.boton_cara_feliz)
             customButton_triste.setBackgroundResource(R.drawable.boton_cara_triste)
         }
-        3 -> {
+        1 -> {
             customButton_triste.setBackgroundResource(R.drawable.boton_cara_triste_pulsado)
             customButton_feliz.setBackgroundResource(R.drawable.boton_cara_feliz)
             customButton_normal.setBackgroundResource(R.drawable.boton_cara_normal)

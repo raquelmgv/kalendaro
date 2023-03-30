@@ -65,7 +65,7 @@ class DiaActual : AppCompatActivity() {
         getRutinasDiaCorrespondiente(rootNode, storageReference, currentUser, referenceCategorias,this@DiaActual, fecha);
 
         customButton_feliz.setOnClickListener{
-            if (faceNumber == 1){ faceNumber = 0 } else{ faceNumber = 1}
+            if (faceNumber == 3){ faceNumber = 0 } else{ faceNumber = 3}
             var diaActHelper: DiaActualHelper = DiaActualHelper(fecha, faceNumber, comerState, banioState, dormirState)
             reference.child(fecha).setValue(diaActHelper)
         }
@@ -75,7 +75,7 @@ class DiaActual : AppCompatActivity() {
             reference.child(fecha).setValue(diaActHelper)
         }
         customButton_triste.setOnClickListener{
-            if (faceNumber == 3){ faceNumber = 0 } else{ faceNumber = 3}
+            if (faceNumber == 1){ faceNumber = 0 } else{ faceNumber = 1}
             var diaActHelper: DiaActualHelper = DiaActualHelper(fecha, faceNumber, comerState, banioState, dormirState)
             reference.child(fecha).setValue(diaActHelper)
         }

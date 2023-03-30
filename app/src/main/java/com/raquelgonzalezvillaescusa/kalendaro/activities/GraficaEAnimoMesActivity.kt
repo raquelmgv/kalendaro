@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_dia_actual.*
 import java.text.NumberFormat
 
 
-class GraficasActivity : AppCompatActivity() {
+class GraficaEAnimoMesActivity : AppCompatActivity() {
     val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance()}
     var currentUser : String = mAuth.uid.toString()
     private lateinit var toolbar: Toolbar
