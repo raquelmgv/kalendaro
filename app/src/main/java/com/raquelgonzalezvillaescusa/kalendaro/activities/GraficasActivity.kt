@@ -40,15 +40,15 @@ class GraficasActivity : AppCompatActivity() {
         displayConceptualMenu()
         toolbar = findViewById(R.id.toolbar)
         setUpToolbar(toolbar)
-        fecha = displayDateMMyyyy().toUpperCase()
+        fecha = displayDateMMyyyy().capitalize()
 
         grafica = findViewById(R.id.graficaEstadosAnimo)
         labelsX = setLabelsX()
         addDataPointsDaysOfCurrentMonth { puntosArray ->
             makeGraph(puntosArray)
         }
-
     }
+
     private fun makeGraph(puntosArray: List<DataPoint>) {
         this.puntos.clear()
         this.puntos.addAll(puntosArray)
