@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.raquelgonzalezvillaescusa.kalendaro.*
 import com.raquelgonzalezvillaescusa.kalendaro.R
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_graficas.*
 class GraficasActivity : AppCompatActivity() {
     val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance()}
     var currentUser : String = mAuth.uid.toString()
+    private lateinit var toolbar: Toolbar
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -23,6 +25,8 @@ class GraficasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_graficas)
         displayConceptualMenu()
+        toolbar = findViewById(R.id.toolbar)
+        setUpToolbar(toolbar)
 
         button_graficaMesActual.setOnClickListener {
                 goToActivity<GraficaEAnimoMesActivity>()
@@ -34,6 +38,13 @@ class GraficasActivity : AppCompatActivity() {
             goToActivity<GraficaEAnimoAniosActivity>()
         }
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun setUpToolbar(toolbar: Toolbar){
+        setSupportActionBar(toolbar)
+        supportActionBar?.setTitle("")
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

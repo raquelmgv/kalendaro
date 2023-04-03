@@ -32,6 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             tools:ignore="MissingConstraints" />
+
         <Button
             android:id="@+id/button_graficaMesActual"
             android:layout_width="380dp"
@@ -45,6 +46,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barActualView"
+            app:layout_constraintVertical_bias="0.982"
             tools:ignore="MissingConstraints" />
 
         <Button
@@ -58,17 +61,15 @@
             android:textSize="@dimen/login_text_size"
             app:layout_constraintBottom_toTopOf="@+id/button_graficaAnios"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.483"
+            app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/barActualView"
-            app:layout_constraintVertical_bias="0.91"
             tools:ignore="MissingConstraints" />
 
         <Button
             android:id="@+id/button_graficaAnios"
             android:layout_width="380dp"
             android:layout_height="75dp"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="144dp"
             android:background="@drawable/button_ripple_bg"
             android:text="@string/grafica_estados_animo_anios"
             android:textColor="@color/colorPrimaryDark"
@@ -85,10 +86,9 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:fitsSystemWindows="true"
-            app:itemBackground="@color/colorPrimary"
             android:theme="@style/BottomNavigationTheme"
+            app:itemBackground="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/conceptual_menu_options">
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
+            app:menu="@menu/conceptual_menu_options"></com.google.android.material.bottomnavigation.BottomNavigationView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
