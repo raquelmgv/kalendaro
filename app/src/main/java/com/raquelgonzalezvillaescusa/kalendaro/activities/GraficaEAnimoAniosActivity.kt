@@ -16,11 +16,11 @@ import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.raquelgonzalezvillaescusa.kalendaro.*
 import com.raquelgonzalezvillaescusa.kalendaro.R
-import kotlinx.android.synthetic.main.activity_dia_actual.*
+import kotlinx.android.synthetic.main.activity_grafica_ea_anios.*
 import java.text.NumberFormat
 
 
-class GraficaEAnimoMesActivity : AppCompatActivity() {
+class GraficaEAnimoAniosActivity : AppCompatActivity() {
     val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance()}
     var currentUser : String = mAuth.uid.toString()
     private lateinit var toolbar: Toolbar
@@ -31,16 +31,14 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
     private var puntos = mutableListOf<DataPoint>()
     private var labelsX = mutableListOf<String>()
 
-
-
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_grafica_ea_mes_actual)
+        setContentView(R.layout.activity_grafica_ea_anios)
         displayConceptualMenu()
         toolbar = findViewById(R.id.toolbar)
         setUpToolbar(toolbar)
-        fecha = displayDateMMyyyy().toUpperCase()
+        fecha = "Últimos años"
 
         grafica = findViewById(R.id.graficaEstadosAnimoMesActual)
         labelsX = setLabelsX()
@@ -53,7 +51,7 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
         this.puntos.clear()
         this.puntos.addAll(puntosArray)
         series = LineGraphSeries(puntos.toTypedArray())
-        series.setTitle("Grafica del mes actual") // Agrega esta línea para la leyenda
+        series.setTitle("Ultimos años") // Agrega esta línea para la leyenda
         grafica.addSeries(series)
 
         grafica.viewport.isXAxisBoundsManual = false
@@ -64,7 +62,7 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
         val maxX = numeroDiasMesActual().toDouble() // valor máximo en el eje X
         grafica.viewport.setMinX(minX)
         grafica.viewport.setMaxX(maxX)
-        grafica.gridLabelRenderer.horizontalAxisTitle = displayDateMMyyyy().capitalize() //eje X
+        grafica.gridLabelRenderer.horizontalAxisTitle = "Ultimos años" //eje X
         grafica.gridLabelRenderer.horizontalAxisTitleTextSize = 40f
         grafica.gridLabelRenderer.horizontalAxisTitleColor = Color.parseColor("#8B00FF")
 

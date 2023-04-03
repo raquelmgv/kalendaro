@@ -32,6 +32,10 @@
         <activity android:name=".activities.GraficasActivity" />
         <activity android:name=".activities.GraficaEAnimoMesActivity"
             android:parentActivityName=".activities.GraficasActivity"/>
+        <activity android:name=".activities.GraficaEAnimoMesesActivity"
+            android:parentActivityName=".activities.GraficasActivity"/>
+        <activity android:name=".activities.GraficaEAnimoAniosActivity"
+            android:parentActivityName=".activities.GraficasActivity"/>
         <activity android:name=".activities.RutinasActivity"
             android:parentActivityName=".activities.CategoriasActivity" />
         <activity android:name=".activities.CalendarActivity"
