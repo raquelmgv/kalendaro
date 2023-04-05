@@ -30,7 +30,6 @@ fun Activity.displayDateMMyyyy(): String {
     val date = System.currentTimeMillis()
     val sdf = SimpleDateFormat("MMMM yyyy")
     val dateString: String = sdf.format(date)
-    barActualView.setText(dateString)
     return dateString.toUpperCase()
 }
 
@@ -38,7 +37,6 @@ fun Activity.displayDateyyyy(): String {
     val date = System.currentTimeMillis()
     val sdf = SimpleDateFormat("yyyy")
     val dateString: String = sdf.format(date)
-    barActualView.setText(dateString)
     return dateString
 }
 
@@ -294,6 +292,12 @@ fun Activity.numeroDiasMesActual() : Int{
         return "0" + currentMonth.toString()
     }
     return currentMonth.toString();
+}
+
+fun Activity.anioActual(): String  {
+    val calendar = Calendar.getInstance()
+    var currentYear = calendar.get(Calendar.YEAR)
+    return currentYear.toString();
 }
 
 fun Activity.showRutinaDeleteView(mContext: Context, rootNode : FirebaseDatabase, storageReference: StorageReference?,

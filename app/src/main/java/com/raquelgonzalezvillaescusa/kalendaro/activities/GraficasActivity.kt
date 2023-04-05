@@ -19,7 +19,6 @@ class GraficasActivity : AppCompatActivity() {
     var currentUser : String = mAuth.uid.toString()
     private lateinit var toolbar: Toolbar
 
-
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,5 +68,4 @@ class GraficasActivity : AppCompatActivity() {
             }
             true }
     }
-
 }

@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.jjoe64.graphview.DefaultLabelFormatter
 import com.jjoe64.graphview.GraphView
+import com.jjoe64.graphview.series.BarGraphSeries
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.raquelgonzalezvillaescusa.kalendaro.*
@@ -24,14 +25,11 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
     val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance()}
     var currentUser : String = mAuth.uid.toString()
     private lateinit var toolbar: Toolbar
-    private lateinit var fecha : String
 
     private lateinit var grafica: GraphView
-    private lateinit var series: LineGraphSeries<DataPoint>
+    private lateinit var series: BarGraphSeries<DataPoint>
     private var puntos = mutableListOf<DataPoint>()
     private var labelsX = mutableListOf<String>()
-
-
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,8 +38,6 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
         displayConceptualMenu()
         toolbar = findViewById(R.id.toolbar)
         setUpToolbar(toolbar)
-        fecha = displayDateMMyyyy().toUpperCase()
-
         grafica = findViewById(R.id.graficaEstadosAnimoMesActual)
         labelsX = setLabelsX()
         addDataPointsDaysOfCurrentMonth { puntosArray ->
@@ -52,26 +48,26 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
     private fun makeGraph(puntosArray: List<DataPoint>) {
         this.puntos.clear()
         this.puntos.addAll(puntosArray)
-        series = LineGraphSeries(puntos.toTypedArray())
-        series.setTitle("Grafica del mes actual") // Agrega esta línea para la leyenda
+        series = BarGraphSeries(puntos.toTypedArray())
+        series.setTitle("Grafica del mes actual")
         grafica.addSeries(series)
-
         grafica.viewport.isXAxisBoundsManual = false
-
-
         grafica.gridLabelRenderer.setHumanRounding(true)
-        val minX = 1.0 // valor mínimo en el eje X
-        val maxX = numeroDiasMesActual().toDouble() // valor máximo en el eje X
+        val minX = 1.0
+        val maxX = numeroDiasMesActual().toDouble()
         grafica.viewport.setMinX(minX)
         grafica.viewport.setMaxX(maxX)
+        val minY = 0.0
+        val maxY = 3.0
+        grafica.viewport.setMinY(minY)
+        grafica.viewport.setMaxY(maxY)
         grafica.gridLabelRenderer.horizontalAxisTitle = displayDateMMyyyy().capitalize() //eje X
         grafica.gridLabelRenderer.horizontalAxisTitleTextSize = 40f
         grafica.gridLabelRenderer.horizontalAxisTitleColor = Color.parseColor("#8B00FF")
-
-        grafica.gridLabelRenderer.numHorizontalLabels = numeroDiasMesActual()// numero de etiquetas
+        grafica.gridLabelRenderer.labelHorizontalHeight = 60
+        grafica.gridLabelRenderer.numHorizontalLabels = numeroDiasMesActual()
         grafica.gridLabelRenderer.setHorizontalLabelsColor(Color.parseColor("#8B00FF"))
-
-        grafica.gridLabelRenderer.numVerticalLabels = 3 // numero de etiquetas
+        grafica.gridLabelRenderer.numVerticalLabels = 4
         grafica.gridLabelRenderer.padding = 10
         grafica.gridLabelRenderer.horizontalAxisTitleTextSize = 60f
         grafica.gridLabelRenderer.setHorizontalLabelsAngle(90)
@@ -79,8 +75,8 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
         series.color = Color.parseColor("#8B00FF")
         val integerFormat = NumberFormat.getIntegerInstance()
         val defaultLabelsFormatter = DefaultLabelFormatter(integerFormat,integerFormat)
-        grafica.getGridLabelRenderer().setVerticalLabelsVisible(false); // oculta los labels del eje Y
-        grafica.getGridLabelRenderer().setVerticalAxisTitle(""); // establece un título vacío para el eje Y
+        grafica.getGridLabelRenderer().setVerticalLabelsVisible(false); // ocultar labels  Y
+        grafica.getGridLabelRenderer().setVerticalAxisTitle("");
         grafica.gridLabelRenderer.labelFormatter = defaultLabelsFormatter
     }
 
@@ -118,7 +114,7 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
 
     private fun setLabelsX () : MutableList<String> {
         var labelsX = mutableListOf<String>()
-        // Obtenemos el número de días del mes actual y lo recorremos para poner loe labels en el eje X
+        /* Obtenemos el número de días del mes actual y lo recorremos para poner loe labels en el eje X*/
         for (i in 1..numeroDiasMesActual()) {
             if(!labelsX.contains(i.toString())){
                 labelsX.add(i.toString())
@@ -157,5 +153,4 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
             }
             true }
     }
-
 }
