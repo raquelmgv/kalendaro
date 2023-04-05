@@ -73,10 +73,10 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
         grafica.gridLabelRenderer.setHorizontalLabelsAngle(90)
         grafica.gridLabelRenderer.setLabelsSpace(-5)
         series.color = Color.parseColor("#8B00FF")
-        val integerFormat = NumberFormat.getIntegerInstance()
-        val defaultLabelsFormatter = DefaultLabelFormatter(integerFormat,integerFormat)
         grafica.getGridLabelRenderer().setVerticalLabelsVisible(false); // ocultar labels  Y
         grafica.getGridLabelRenderer().setVerticalAxisTitle("");
+        val integerFormat = NumberFormat.getIntegerInstance()
+        val defaultLabelsFormatter = DefaultLabelFormatter(integerFormat,integerFormat)
         grafica.gridLabelRenderer.labelFormatter = defaultLabelsFormatter
     }
 

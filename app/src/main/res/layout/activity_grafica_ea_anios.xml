@@ -19,14 +19,17 @@
 
         <TextView
             android:id="@+id/barActualView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/bar_actual_view"
+            android:layout_width="416dp"
+            android:layout_height="87dp"
             android:background="@color/colorPrimary"
             android:elevation="4dp"
+            android:text="@string/grafica_estados_animo"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/bar_text_size"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             tools:ignore="MissingConstraints" />
 
@@ -40,7 +43,7 @@
             android:text="@string/grafica_estados_animo_anios"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/login_text_size"
+            android:textSize="@dimen/bar_text_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/graficaEstadosAnimoMesActual"
             app:layout_constraintTop_toBottomOf="@+id/barActualView"
@@ -76,16 +79,18 @@
             android:layout_height="32dp"
             android:background="@drawable/boton_cara_feliz_pulsado"
             app:layout_constraintBottom_toTopOf="@+id/imageView4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/barActualView"
-            app:layout_constraintVertical_bias="0.721"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintVertical_bias="0.88"
+            tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="43dp"
             android:layout_height="32dp"
-            android:layout_marginBottom="76dp"
+            android:layout_marginBottom="36dp"
             android:background="@drawable/boton_cara_normal_pulsado"
             app:layout_constraintBottom_toTopOf="@+id/imageView5"
             app:layout_constraintEnd_toEndOf="@+id/graficaEstadosAnimoMesActual"
@@ -97,7 +102,7 @@
             android:id="@+id/imageView5"
             android:layout_width="43dp"
             android:layout_height="32dp"
-            android:layout_marginBottom="180dp"
+            android:layout_marginBottom="208dp"
             android:background="@drawable/boton_cara_triste_pulsado"
             app:layout_constraintBottom_toTopOf="@+id/conceptualMenuIconsBar"
             app:layout_constraintEnd_toEndOf="parent"
