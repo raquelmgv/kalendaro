@@ -43,12 +43,27 @@ class ListViewActividadesAdapter(private val mContext: Context, private val acti
         /*3*/
         var fotoActividadPath = "$currentUser/images/rutina_details/cat_$categoria/rut_$rutina/act_$actividad_hora"
         var fotoActividadRef = storageReference?.child(fotoActividadPath)
-        GlideApp.with(mContext)
-            .load(fotoActividadRef)
-            .apply(RequestOptions().override(100, 100))
-            .fitCenter()
-            .centerCrop()
-            .into(layout_row.actividad_imagen)
+
+        fotoActividadRef?.metadata?.addOnSuccessListener { metadata ->
+            // mirar si la imagen existe
+            val exists = metadata.sizeBytes > 0
+            if (exists) {
+                GlideApp.with(mContext)
+                    .load(fotoActividadRef)
+                    .apply(RequestOptions().override(100, 100))
+                    .fitCenter()
+                    .centerCrop()
+                    .into(layout_row.actividad_imagen)
+            } else { // si la imagen no existe pongo la imagen por defecto
+                GlideApp.with(mContext)
+                    .load(R.drawable.arasaac_fotografia)
+                    .apply(RequestOptions().override(100, 100))
+                    .fitCenter()
+                    .centerCrop()
+                    .into(layout_row.actividad_imagen)
+            }
+        }
+
         layout_row.actividad_display_hora.text = actividad_hora
         layout_row.actividad_display_name.text =  actividad_nombre
         /*PONER FONDO MORADO SEGUN LA HORA*/

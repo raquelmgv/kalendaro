@@ -47,11 +47,5 @@
                 android:layout_column="1"
                 android:gravity="center"
                 app:srcCompat="@drawable/arasaac_fotografia" />
-
-
         </TableLayout>
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

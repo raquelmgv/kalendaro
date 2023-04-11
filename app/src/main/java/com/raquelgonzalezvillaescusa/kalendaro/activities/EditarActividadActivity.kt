@@ -201,9 +201,11 @@ class EditarActividadActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_GALLERY){
+            crearActividadImagen?.setImageDrawable(null)
             crearActividadImagen.setImageURI(data?.data)
         }
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_CAMERA){
+            crearActividadImagen?.setImageDrawable(null)
             crearActividadImagen.setImageURI(fotoCamara)
         }
     }

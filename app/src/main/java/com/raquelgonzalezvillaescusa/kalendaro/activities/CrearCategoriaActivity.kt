@@ -44,6 +44,7 @@ class CrearCategoriaActivity : AppCompatActivity() {
     internal var storage: FirebaseStorage? = null
     internal var storageReference: StorageReference? = null
 
+    var fotoGaleria: Uri? = null
     var fotoCamara: Uri? = null //Uri : direccion interna de un archivo (identificador de recursos)
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -181,30 +182,32 @@ class CrearCategoriaActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_GALLERY){
-            crearCategoriaImagen.setImageURI(data?.data)
+            crearCategoriaImagen?.setImageDrawable(null)
+            fotoGaleria = data?.data
+            crearCategoriaImagen.setImageURI(fotoGaleria)
         }
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_CAMERA){
+            crearCategoriaImagen?.setImageDrawable(null)
             crearCategoriaImagen.setImageURI(fotoCamara)
         }
     }
 
     private fun guardarDatosDB(categoriaNombre: String){
        /*3*/
-        var fotoCategoriaRef = storageReference?.child("$currentUser/images/categorias/cat_$categoriaNombre")
-        crearCategoriaImagen.isDrawingCacheEnabled = true
-        crearCategoriaImagen.buildDrawingCache()
-        val bitmap = (crearCategoriaImagen.drawable as BitmapDrawable).bitmap
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()
-        var uploadTask = fotoCategoriaRef?.putBytes(data)
-        if (uploadTask != null) {
-            uploadTask.addOnFailureListener {
-                toast("Error al guardar")
-            }.addOnSuccessListener { taskSnapshot ->
-                var crearCategoriaHelper = CrearCategoriaHelper(categoriaNombre)
-                reference.child(categoriaNombre).setValue(crearCategoriaHelper)
-            }
+        if(fotoGaleria != null || fotoCamara != null) {
+            var fotoCategoriaRef =
+                storageReference?.child("$currentUser/images/categorias/cat_$categoriaNombre")
+            crearCategoriaImagen.isDrawingCacheEnabled = true
+            crearCategoriaImagen.buildDrawingCache()
+            val bitmap = (crearCategoriaImagen.drawable as BitmapDrawable).bitmap
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+            fotoCategoriaRef?.putBytes(data)
         }
+        var crearCategoriaHelper = CrearCategoriaHelper(categoriaNombre)
+        reference.child(categoriaNombre).setValue(crearCategoriaHelper)
+
     }
+
 }

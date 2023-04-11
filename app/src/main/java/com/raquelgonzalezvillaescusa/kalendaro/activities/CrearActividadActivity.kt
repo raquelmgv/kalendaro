@@ -6,7 +6,6 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.PorterDuff
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
@@ -198,34 +197,34 @@ class CrearActividadActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_GALLERY){
-            crearActividadImagen.setImageURI(data?.data)
+            crearActividadImagen?.setImageDrawable(null)
+            fotoGaleria = data?.data
+            crearActividadImagen.setImageURI(fotoGaleria)
         }
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_CAMERA){
+            crearActividadImagen?.setImageDrawable(null)
             crearActividadImagen.setImageURI(fotoCamara)
         }
     }
 
-    private fun guardarDatosDB(){
+    private fun guardarDatosDB() {
         var horaActividad = actividad_input_hora.hint.toString()
         /*3*/
-        var fotoActividadRef = storageReference?.child("$currentUser/images/rutina_details/cat_$categoriaActual/rut_$rutinaActual/act_$horaActividad")
-        crearActividadImagen.isDrawingCacheEnabled = true
-        crearActividadImagen.buildDrawingCache()
-        val bitmap = (crearActividadImagen.drawable as BitmapDrawable).bitmap
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()
-        var uploadTask = fotoActividadRef?.putBytes(data)
-        if (uploadTask != null) {
-            uploadTask.addOnFailureListener {
-                toast("Error al guardar")
-            }.addOnSuccessListener { taskSnapshot ->
-                toast("Imagen guardada correctamente")
-                var crearActividadHelper = CrearActividadHelper(actividad_input_hora.hint.toString(), editTextCrearActividad.text.toString(), "$rutinaActual+$categoriaActual")
-                reference_actividades.child(actividad_input_hora.hint.toString()).setValue(crearActividadHelper)
-                gotoActividadesActivity()
-            }
+        if(fotoGaleria != null || fotoCamara != null) {
+            var fotoActividadRef =
+                storageReference?.child("$currentUser/images/rutina_details/cat_$categoriaActual/rut_$rutinaActual/act_$horaActividad")
+            crearActividadImagen.isDrawingCacheEnabled = true
+            crearActividadImagen.buildDrawingCache()
+            val bitmap = (crearActividadImagen.drawable as BitmapDrawable).bitmap
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+            fotoActividadRef?.putBytes(data)
         }
+
+        var crearActividadHelper = CrearActividadHelper(actividad_input_hora.hint.toString(), editTextCrearActividad.text.toString(), "$rutinaActual+$categoriaActual")
+        reference_actividades.child(actividad_input_hora.hint.toString()).setValue(crearActividadHelper)
+        gotoActividadesActivity()
     }
 
     private fun gotoActividadesActivity(){

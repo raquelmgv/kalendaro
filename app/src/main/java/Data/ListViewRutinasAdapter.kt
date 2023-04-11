@@ -29,12 +29,25 @@ class ListViewRutinasAdapter(private val mContext: Context, private val rutinasL
         /*3*/
         var fotoRutinaPath = "$currentUser/images/rutinas/cat_$categoriaRutina/rut_$rutina"
         var fotoRutinaRef = storageReference?.child(fotoRutinaPath)
-        GlideApp.with(mContext)
-            .load(fotoRutinaRef)
-            .apply(RequestOptions().override(100, 100))
-            .fitCenter()
-            .centerCrop()
-            .into(layout_row.categoriaImagenListView)
+        fotoRutinaRef?.metadata?.addOnSuccessListener { metadata ->
+            // mirar si la imagen existe
+            val exists = metadata.sizeBytes > 0
+            if (exists) {
+                GlideApp.with(mContext)
+                    .load(fotoRutinaRef)
+                    .apply(RequestOptions().override(100, 100))
+                    .fitCenter()
+                    .centerCrop()
+                    .into(layout_row.categoriaImagenListView)
+            } else { // si la imagen no existe pongo la imagen por defecto
+                GlideApp.with(mContext)
+                    .load(R.drawable.arasaac_fotografia)
+                    .apply(RequestOptions().override(100, 100))
+                    .fitCenter()
+                    .centerCrop()
+                    .into(layout_row.categoriaImagenListView)
+            }
+        }
         layout_row.categoriaNombreListView.text = rutina
         return layout_row
     }

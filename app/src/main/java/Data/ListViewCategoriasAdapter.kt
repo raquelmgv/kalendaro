@@ -24,16 +24,28 @@ class ListViewCategoriasAdapter(private val mContext: Context, private val categ
         storageReference = storage!!.reference
         val layout_row = LayoutInflater.from(mContext).inflate(R.layout.list_row_layout, parent,false)
         val categoria = categoriasRutinasList[position]
-        Log.w("CATEGORIA", categoria)
 
         var fotoCategoriaPath = "$currentUser/images/categorias/cat_$categoria"
         var fotoCategoriaRef = storageReference?.child(fotoCategoriaPath)
-        GlideApp.with(mContext)
-            .load(fotoCategoriaRef)
-            .apply(RequestOptions().override(100, 100))
-            .fitCenter()
-            .centerCrop()
-            .into(layout_row.categoriaImagenListView)
+        fotoCategoriaRef?.metadata?.addOnSuccessListener { metadata ->
+            // mirar si la imagen existe
+            val exists = metadata.sizeBytes > 0
+            if (exists) {
+                GlideApp.with(mContext)
+                    .load(fotoCategoriaRef)
+                    .apply(RequestOptions().override(100, 100))
+                    .fitCenter()
+                    .centerCrop()
+                    .into(layout_row.categoriaImagenListView)
+            } else { // si la imagen no existe pongo la imagen por defecto
+                GlideApp.with(mContext)
+                    .load(R.drawable.arasaac_fotografia)
+                    .apply(RequestOptions().override(100, 100))
+                    .fitCenter()
+                    .centerCrop()
+                    .into(layout_row.categoriaImagenListView)
+            }
+        }
         layout_row.categoriaNombreListView.text = categoria
         return layout_row
     }

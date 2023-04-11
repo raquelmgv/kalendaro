@@ -51,7 +51,6 @@
 
         <ImageView
             android:id="@+id/crearRutinaImagen"
-            android:background="@drawable/arasaac_fotografia"
             android:layout_width="207dp"
             android:layout_height="209dp"
             android:layout_marginBottom="32dp"

@@ -29,17 +29,19 @@ class GraficaEAnimoAniosActivity : AppCompatActivity() {
     private lateinit var series: BarGraphSeries<DataPoint>
     private var puntos = mutableListOf<DataPoint>()
     private var labelsX = mutableListOf<String>()
+    //val ultimosAnios = listOf("2019","2020","2021","2022","2023")
+
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_grafica_ea_meses)
+        setContentView(R.layout.activity_grafica_ea_anios)
         displayConceptualMenu()
         toolbar = findViewById(R.id.toolbar)
         setUpToolbar(toolbar)
         grafica = findViewById(R.id.graficaEstadosAnimoMesActual)
         labelsX = setLabelsX()
-        addDataPointsDaysOfCurrentMonth { puntosArray ->
+        addDataPointsYears { puntosArray ->
             val puntosOrdenados = puntosArray.sortedBy { it.x }
             val puntosConPromedio = getPuntosPromedio(puntosOrdenados)
             makeGraph(puntosConPromedio)
@@ -72,18 +74,18 @@ class GraficaEAnimoAniosActivity : AppCompatActivity() {
         grafica.addSeries(series)
         grafica.viewport.isXAxisBoundsManual = true
         grafica.gridLabelRenderer.setHumanRounding(true)
-        /*val minX = 1.0
-        val maxX = 12.0
+        val minX = 2019.0
+        val maxX = 2023.0 // Ultimos 5 anios eje X
         grafica.viewport.setMinX(minX)
-        grafica.viewport.setMaxX(maxX)*/
+        grafica.viewport.setMaxX(maxX)
         val minY = 0.0
         val maxY = 3.0
         grafica.viewport.setMinY(minY)
         grafica.viewport.setMaxY(maxY)
-        grafica.gridLabelRenderer.horizontalAxisTitle = displayDateyyyy() //eje X
+        grafica.gridLabelRenderer.horizontalAxisTitle = "Últimos 5 años"//eje X
         grafica.gridLabelRenderer.horizontalAxisTitleTextSize = 40f
         grafica.gridLabelRenderer.horizontalAxisTitleColor = Color.parseColor("#8B00FF")
-        grafica.gridLabelRenderer.labelHorizontalHeight = 90 // Posición de los labels
+        grafica.gridLabelRenderer.labelHorizontalHeight = 100 // Posición de los labels
         grafica.gridLabelRenderer.setHorizontalLabelsColor(Color.parseColor("#8B00FF"))
         grafica.gridLabelRenderer.numVerticalLabels = 4
         grafica.gridLabelRenderer.padding = 10
@@ -91,14 +93,25 @@ class GraficaEAnimoAniosActivity : AppCompatActivity() {
         grafica.gridLabelRenderer.setHorizontalLabelsAngle(90)
         grafica.gridLabelRenderer.setLabelsSpace(-5)
         series.color = Color.parseColor("#8B00FF")
+        //DefaultLabelFormatter
+        val labelFormatter = object : DefaultLabelFormatter() {
+            override fun formatLabel(value: Double, isValueX: Boolean): String {
+                return if (isValueX) {
+                    // Si es el eje X, obtener el label a partir del valor redondeado
+                    val year = value.toInt().toString()
+                    year
+                } else {
+                    // Si es el eje Y, utilizar el formateador predeterminado
+                    super.formatLabel(value, isValueX)
+                }
+            }
+        }
+        grafica.gridLabelRenderer.labelFormatter = labelFormatter
         grafica.getGridLabelRenderer().setVerticalLabelsVisible(false);
         grafica.getGridLabelRenderer().setVerticalAxisTitle("");
-        val integerFormat = NumberFormat.getIntegerInstance()
-        val defaultLabelsFormatter = DefaultLabelFormatter(integerFormat,integerFormat)
-        grafica.gridLabelRenderer.labelFormatter = defaultLabelsFormatter
     }
 
-    private fun addDataPointsDaysOfCurrentMonth(callback: (List<DataPoint>) -> Unit) {
+    private fun addDataPointsYears(callback: (List<DataPoint>) -> Unit) {
         var faceNumber: Double
         val rootNode = FirebaseDatabase.getInstance()
         lateinit var reference: DatabaseReference
@@ -113,14 +126,14 @@ class GraficaEAnimoAniosActivity : AppCompatActivity() {
                         val anio = convertDateToString(datosDiaActualData.key.toString()).substring(0,4)
                         for(datosDia in datosDiaActualData.children){
                             faceNumber = 0.0
-                            if(anio.equals(anioActual())){
+                            //if(anio.equals(anioActual())){
                                 if (datosDia.key.toString() == "faceNumber") {
                                     faceNumber = datosDia.value.toString().toDouble()
                                     if(!puntosArray.contains(DataPoint(anio.toInt().toDouble(), faceNumber))){
                                         puntosArray.add(DataPoint(anio.toInt().toDouble(), faceNumber))
                                     }
                                 }
-                            }
+                            //}
                         }
                     }
                 }

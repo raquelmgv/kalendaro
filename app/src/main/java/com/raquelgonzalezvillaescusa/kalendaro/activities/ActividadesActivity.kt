@@ -119,7 +119,6 @@ class ActividadesActivity : AppCompatActivity() {
             true }
     }
 
-
     private fun getActividadesDB() {
         actividadesNameList = mutableListOf()
         actividadesHourList = mutableListOf()

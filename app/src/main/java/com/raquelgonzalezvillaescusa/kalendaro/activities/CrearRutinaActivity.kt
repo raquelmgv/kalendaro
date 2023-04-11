@@ -6,7 +6,6 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.PorterDuff
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
@@ -115,16 +114,16 @@ class CrearRutinaActivity : AppCompatActivity() {
     }
 
     private fun showDateInitPickerDialog(){
-      val datePicker = DatePickerFragment({year, month, day ->
-          onDateInitSelected(year, month+1, day)
-      })
+      val datePicker = DatePickerFragment { year, month, day ->
+          onDateInitSelected(year, month + 1, day)
+      }
         datePicker.show(supportFragmentManager, "datePicker")
     }
 
     private fun showDateFinPickerDialog(){
-        val datePicker = DatePickerFragment({year, month, day ->
-            onDateFinSelected(year, month+1, day)
-        })
+        val datePicker = DatePickerFragment { year, month, day ->
+            onDateFinSelected(year, month + 1, day)
+        }
         datePicker.show(supportFragmentManager, "datePicker")
     }
     private fun onDateInitSelected(year: Int, month: Int, day: Int){
@@ -249,36 +248,34 @@ class CrearRutinaActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_GALLERY){
-            crearRutinaImagen.setImageURI(data?.data)
+            crearRutinaImagen?.setImageDrawable(null)
+            fotoGaleria = data?.data
+            crearRutinaImagen.setImageURI(fotoGaleria)
         }
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_CAMERA){
+            crearRutinaImagen?.setImageDrawable(null)
             crearRutinaImagen.setImageURI(fotoCamara)
         }
     }
 
     private fun guardarDatosDB(rutinaNombre: String) {
         /*3*/
-        var fotoCategoriaRef = storageReference?.child("$currentUser/images/rutinas/cat_$categoriaActual/rut_$rutinaNombre")
-        crearRutinaImagen.isDrawingCacheEnabled = true
-        crearRutinaImagen.buildDrawingCache()
-        val bitmap = (crearRutinaImagen.drawable as BitmapDrawable).bitmap
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()
-        var uploadTask = fotoCategoriaRef?.putBytes(data)
-        if (uploadTask != null) {
-            uploadTask.addOnFailureListener {
-                toast("Error al guardar")
-            }.addOnSuccessListener { taskSnapshot ->
-                toast("rutina guardada correctamente")
-                var crearRutinaHelper = CrearRutinaHelper(rutinaNombre, DDMMMMYYYYFormatByYearMonthDay(
-                    Date(anio.toInt() - 1900, mes.toInt()-1, dia.toInt())
-                ), DDMMMMYYYYFormatByYearMonthDay(
-                    Date(anioFin.toInt() - 1900, mesFin.toInt()-1, diaFin.toInt())))
-
-                reference.child(rutinaNombre).setValue(crearRutinaHelper)
-                //referenceDiaActual.child(rutinaNombre).setValue(crearRutinaHelper)
-            }
+        if(fotoGaleria != null || fotoCamara != null) {
+            var fotoCategoriaRef = storageReference?.child("$currentUser/images/rutinas/cat_$categoriaActual/rut_$rutinaNombre")
+            crearRutinaImagen.isDrawingCacheEnabled = true
+            crearRutinaImagen.buildDrawingCache()
+            val bitmap = (crearRutinaImagen.drawable as BitmapDrawable).bitmap
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+            fotoCategoriaRef?.putBytes(data)
         }
+
+        var crearRutinaHelper = CrearRutinaHelper(rutinaNombre, DDMMMMYYYYFormatByYearMonthDay(
+            Date(anio.toInt() - 1900, mes.toInt()-1, dia.toInt())
+        ), DDMMMMYYYYFormatByYearMonthDay(
+            Date(anioFin.toInt() - 1900, mesFin.toInt()-1, diaFin.toInt())))
+
+        reference.child(rutinaNombre).setValue(crearRutinaHelper)
     }
 }

@@ -50,7 +50,6 @@
             android:layout_width="207dp"
             android:layout_height="199dp"
             android:layout_marginBottom="32dp"
-            android:background="@drawable/arasaac_fotografia"
             android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/buttonActividadImagenGaleria"
             app:layout_constraintEnd_toEndOf="parent"

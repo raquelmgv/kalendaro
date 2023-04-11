@@ -65,8 +65,8 @@
     <string name="graficas">Gráficas</string>
     <string name="graficas_estados_animo">Estados de ánimo</string>
     <string name="grafica_estados_animo">GRAFICAS DE LOS ESTADOS DE ÁNIMO </string>
-    <string name="grafica_estados_animo_anios">ULTIMOS AÑOS</string>
-    <string name="grafica_estados_animo_meses_anio">AÑO ACTUAL</string>
+    <string name="grafica_estados_animo_anios">PROMEDIO DE LOS ÚLTIMOS 5 AÑOS</string>
+    <string name="grafica_estados_animo_meses_anio">PROMEDIO DEL AÑO ACTUAL</string>
     <string name="grafica_estados_animo_dias_mes">MES ACTUAL</string>
 
 </resources>
