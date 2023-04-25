@@ -84,14 +84,14 @@ class GraficaEAnimoMesesActivity : AppCompatActivity() {
         grafica.gridLabelRenderer.horizontalAxisTitle = displayDateyyyy() //eje X
         grafica.gridLabelRenderer.horizontalAxisTitleTextSize = 40f
         grafica.gridLabelRenderer.horizontalAxisTitleColor = Color.parseColor("#C6AADB")
-        grafica.gridLabelRenderer.labelHorizontalHeight = 90 // Posición de los labels
+        grafica.gridLabelRenderer.labelHorizontalHeight = 90
         grafica.gridLabelRenderer.numHorizontalLabels = 12
         grafica.gridLabelRenderer.setHorizontalLabelsColor(Color.parseColor("#C6AADB"))
         grafica.gridLabelRenderer.numVerticalLabels = 4
         grafica.gridLabelRenderer.padding = 10
         grafica.gridLabelRenderer.horizontalAxisTitleTextSize = 60f
         grafica.gridLabelRenderer.setHorizontalLabelsAngle(90)
-        grafica.gridLabelRenderer.setLabelsSpace(-5)
+        grafica.gridLabelRenderer.setLabelsSpace(5)
         series.color = Color.parseColor("#C6AADB")
 
         //DefaultLabelFormatter

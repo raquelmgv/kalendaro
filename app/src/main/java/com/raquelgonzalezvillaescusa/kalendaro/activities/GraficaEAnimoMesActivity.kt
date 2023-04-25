@@ -71,7 +71,7 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
         grafica.gridLabelRenderer.padding = 10
         grafica.gridLabelRenderer.horizontalAxisTitleTextSize = 60f
         grafica.gridLabelRenderer.setHorizontalLabelsAngle(90)
-        grafica.gridLabelRenderer.setLabelsSpace(-5)
+        grafica.gridLabelRenderer.setLabelsSpace(5)
         series.color = Color.parseColor("#C6AADB")
         grafica.getGridLabelRenderer().setVerticalLabelsVisible(false); // ocultar labels  Y
         grafica.getGridLabelRenderer().setVerticalAxisTitle("");
