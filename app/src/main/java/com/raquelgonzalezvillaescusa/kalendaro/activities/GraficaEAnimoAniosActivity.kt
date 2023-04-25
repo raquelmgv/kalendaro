@@ -84,15 +84,15 @@ class GraficaEAnimoAniosActivity : AppCompatActivity() {
         grafica.viewport.setMaxY(maxY)
         grafica.gridLabelRenderer.horizontalAxisTitle = "Últimos 5 años"//eje X
         grafica.gridLabelRenderer.horizontalAxisTitleTextSize = 40f
-        grafica.gridLabelRenderer.horizontalAxisTitleColor = Color.parseColor("#8B00FF")
+        grafica.gridLabelRenderer.horizontalAxisTitleColor = Color.parseColor("#C6AADB")
         grafica.gridLabelRenderer.labelHorizontalHeight = 100 // Posición de los labels
-        grafica.gridLabelRenderer.setHorizontalLabelsColor(Color.parseColor("#8B00FF"))
+        grafica.gridLabelRenderer.setHorizontalLabelsColor(Color.parseColor("#C6AADB"))
         grafica.gridLabelRenderer.numVerticalLabels = 4
         grafica.gridLabelRenderer.padding = 10
         grafica.gridLabelRenderer.horizontalAxisTitleTextSize = 60f
         grafica.gridLabelRenderer.setHorizontalLabelsAngle(90)
         grafica.gridLabelRenderer.setLabelsSpace(-5)
-        series.color = Color.parseColor("#8B00FF")
+        series.color = Color.parseColor("#C6AADB")
         //DefaultLabelFormatter
         val labelFormatter = object : DefaultLabelFormatter() {
             override fun formatLabel(value: Double, isValueX: Boolean): String {
@@ -163,7 +163,6 @@ class GraficaEAnimoAniosActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.graficas -> goToActivity<GraficasActivity> {}
-            R.id.editarPerfil -> goToActivity<EditarPerfilActivity> {}
             R.id.logOut -> goToActivity<LoginActivity> {}
         }
         return super.onOptionsItemSelected(item);

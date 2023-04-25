@@ -63,16 +63,16 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
         grafica.viewport.setMaxY(maxY)
         grafica.gridLabelRenderer.horizontalAxisTitle = displayDateMMyyyy().capitalize() //eje X
         grafica.gridLabelRenderer.horizontalAxisTitleTextSize = 40f
-        grafica.gridLabelRenderer.horizontalAxisTitleColor = Color.parseColor("#8B00FF")
+        grafica.gridLabelRenderer.horizontalAxisTitleColor = Color.parseColor("#C6AADB")
         grafica.gridLabelRenderer.labelHorizontalHeight = 60
         grafica.gridLabelRenderer.numHorizontalLabels = numeroDiasMesActual()
-        grafica.gridLabelRenderer.setHorizontalLabelsColor(Color.parseColor("#8B00FF"))
+        grafica.gridLabelRenderer.setHorizontalLabelsColor(Color.parseColor("#C6AADB"))
         grafica.gridLabelRenderer.numVerticalLabels = 4
         grafica.gridLabelRenderer.padding = 10
         grafica.gridLabelRenderer.horizontalAxisTitleTextSize = 60f
         grafica.gridLabelRenderer.setHorizontalLabelsAngle(90)
         grafica.gridLabelRenderer.setLabelsSpace(-5)
-        series.color = Color.parseColor("#8B00FF")
+        series.color = Color.parseColor("#C6AADB")
         grafica.getGridLabelRenderer().setVerticalLabelsVisible(false); // ocultar labels  Y
         grafica.getGridLabelRenderer().setVerticalAxisTitle("");
         val integerFormat = NumberFormat.getIntegerInstance()
@@ -133,7 +133,6 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.graficas -> goToActivity<GraficasActivity> {}
-            R.id.editarPerfil -> goToActivity<EditarPerfilActivity> {}
             R.id.logOut -> goToActivity<LoginActivity> {}
         }
         return super.onOptionsItemSelected(item);

@@ -3,9 +3,11 @@ package com.raquelgonzalezvillaescusa.kalendaro.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.raquelgonzalezvillaescusa.kalendaro.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.popup_delete_item.view.*
 
 
 class LoginActivity : AppCompatActivity() {

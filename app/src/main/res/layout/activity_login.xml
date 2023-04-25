@@ -76,11 +76,11 @@
             android:layout_marginBottom="32dp"
             android:text="@string/login_forgot_password"
             android:textColor="@color/colorWhiteText"
-            app:layout_constraintBottom_toTopOf="@+id/buttonLogInGoogle"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCreateAccount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints" />
-
+<!--
         <Button
             android:id="@+id/buttonLogInGoogle"
             android:layout_width="match_parent"
@@ -95,7 +95,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints" />
-
+-->
         <Button
             android:id="@+id/buttonCreateAccount"
             android:layout_width="match_parent"

@@ -45,7 +45,6 @@ class EditarPerfilActivity : AppCompatActivity() {
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.graficas -> goToActivity<GraficasActivity> {}
-            R.id.editarPerfil -> goToActivity<EditarPerfilActivity> {}
             R.id.logOut -> goToActivity<LoginActivity> {}
         }
         return super.onOptionsItemSelected(item);

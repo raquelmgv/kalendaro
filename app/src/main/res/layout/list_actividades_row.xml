@@ -10,7 +10,7 @@
         android:id="@+id/tableLayout_rutina_details_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="1"
+        android:stretchColumns="3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

@@ -193,7 +193,7 @@ fun Activity.getRutinasDiaCorrespondiente(rootNode : FirebaseDatabase, storageRe
                     var referenceRutina : DatabaseReference
                     val rutName = rutinasList.get(i)
                     val catName = categoriaCorrespondienteList.get(i)
-                    referenceRutina = rootNode.getReference("$currentUser/categoriasRutinaData/$catName/rutinas/rut_$rutName")
+                    referenceRutina = rootNode.getReference("$currentUser/categoriasRutinaData/$catName/rutinas")
                     showRutinaDeleteView(mContext, rootNode, storageReference, rutName, currentUser,  catName, referenceRutina);
 
                     true
@@ -320,7 +320,7 @@ fun Activity.showRutinaDeleteView(mContext: Context, rootNode : FirebaseDatabase
             fotoRutinaRef.delete()
         };
         mAlertDialog.dismiss()
-        reloadActivity(mContext, null, null)
+        //reloadActivity(mContext, null, null)
     }
 
 }

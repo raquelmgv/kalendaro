@@ -1,5 +1,6 @@
 package com.raquelgonzalezvillaescusa.kalendaro.activities
 
+import Data.CrearActividadHelper
 import Data.ListViewActividadesAdapter
 import android.content.Intent
 import android.graphics.PorterDuff
@@ -9,7 +10,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.AdapterView
+import android.widget.ListView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -29,13 +32,19 @@ class ActividadesActivity : AppCompatActivity() {
     private var currentUser : String = mAuth.uid.toString()
 
     private lateinit var toolbar: Toolbar
+    private lateinit var listViewData: ListView
     private lateinit var bundle: Bundle
     private lateinit var categoriaActual: String
     private lateinit var rutinaActual: String
     private lateinit var actividadesNameList: MutableList<String>
     private lateinit var actividadesHourList: MutableList<String>
+    private lateinit var actividadesStatusList: MutableList<Int>
+    private lateinit var actividadesIDList: MutableList<String>
+
     private lateinit var rootNode : FirebaseDatabase
     private lateinit var reference_actividades : DatabaseReference
+    private var actividadState: Int = 0
+
     /*1*/
     internal var storage: FirebaseStorage? = null
     internal var storageReference: StorageReference? = null
@@ -47,6 +56,8 @@ class ActividadesActivity : AppCompatActivity() {
 
         toolbar = findViewById(R.id.toolbar)
         setUpToolbar(toolbar)
+
+        listViewData  = findViewById(R.id.actividadesListView)
         displayConceptualMenu()
         /*2*/
         storage = FirebaseStorage.getInstance()
@@ -100,7 +111,6 @@ class ActividadesActivity : AppCompatActivity() {
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.graficas -> goToActivity<GraficasActivity> {}
-            R.id.editarPerfil -> goToActivity<EditarPerfilActivity> {}
             R.id.logOut -> goToActivity<LoginActivity> {}
         }
         return super.onOptionsItemSelected(item);
@@ -122,6 +132,8 @@ class ActividadesActivity : AppCompatActivity() {
     private fun getActividadesDB() {
         actividadesNameList = mutableListOf()
         actividadesHourList = mutableListOf()
+        actividadesIDList = mutableListOf()
+        actividadesStatusList = mutableListOf()
         reference_actividades.addValueEventListener(object :
             ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
@@ -137,23 +149,38 @@ class ActividadesActivity : AppCompatActivity() {
                             if(i.key.toString() == "hora"){
                                 actividadesHourList.add(i.value.toString())
                             }
+                            if(i.key.toString() == "status"){
+                                actividadesStatusList.add(i.value.toString().toInt())
+                            }
+                            if(i.key.toString() == "id"){
+                                actividadesIDList.add(i.value.toString())
+                            }
                         }
                     }
-                    Log.w("HOUR ARRAY","$actividadesHourList")
-                    Log.w("NAME ARRAY","$actividadesNameList")
 
                     var adaptador = ListViewActividadesAdapter(applicationContext, actividadesHourList, actividadesNameList, rutinaActual, categoriaActual)
                     actividadesListView.adapter = adaptador
                     //Detectar cuando se seleccione un elemento de la lista
-                    actividadesListView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
+                    /*actividadesListView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
                         val actHour = actividadesHourList.get(i)
-                        intent = Intent(this@ActividadesActivity, ActividadActualActivity::class.java)
+                        val actName = actividadesNameList.get(i)
+                        val actId = actividadesIDList.get(i)
+                        val referenceActividad =  rootNode.getReference("$reference_actividades/$actHour")
+                        when (actividadState) {
+                            0 -> actividadState = 1
+                            1 -> actividadState = 2
+                            2 -> actividadState = 3
+                            else -> actividadState = 0
+                        }
+                        var crearActividadHelper = CrearActividadHelper(actHour, actName, actId, actividadState)
+                        referenceActividad.child(actHour).setValue(crearActividadHelper)
+                        /*intent = Intent(this@ActividadesActivity, ActividadActualActivity::class.java)
                         var dato: String = actHour
                         val b: Bundle = Bundle()
                         b.putString("actividadHora", dato)
                         intent.putExtras(b)
-                        startActivity(intent)
-                    }
+                        startActivity(intent)*/
+                    }*/
                     actividadesListView.onItemLongClickListener = AdapterView.OnItemLongClickListener { adapterView, view, i, l ->
                         val actName = actividadesNameList.get(i)
                         val actHour = actividadesHourList.get(i)
@@ -164,6 +191,20 @@ class ActividadesActivity : AppCompatActivity() {
             }
         })
     }
+
+ /*   private fun getChecks() {
+        var adaptador = ListViewActividadesAdapter(applicationContext,
+            actividadesHourList, actividadesNameList, rutinaActual, categoriaActual)
+        if (adaptador != null) {
+            for (i in 0 until adaptador.count) {
+                val elemento = adaptador.getItem(i)
+                if (elemento) {
+                    // El elemento está marcado
+                }
+            }
+        }
+    }
+*/
 
     fun showDeleteView(actName: String, actHour: String){
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.popup_delete_item, null)
@@ -176,11 +217,12 @@ class ActividadesActivity : AppCompatActivity() {
             mAlertDialog.dismiss()
            // recargarActivity()
         }
-        mDialogView.button_editar.setOnClickListener {
+        mDialogView.button_editar.visibility = View.INVISIBLE
+        /*mDialogView.button_editar.setOnClickListener {
             editarActividad(actName, actHour)
             mAlertDialog.dismiss()
             recargarActivity()
-        }
+        }*/
     }
 
     private fun eliminarActividad(actHour: String){

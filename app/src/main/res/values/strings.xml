@@ -52,12 +52,17 @@
     <string name="actividad_insert_nombre">Nombre de la actividad</string>
     <string name="menu_crear_actividad">Crear Actividad</string>
     <string name="menu_editar_actividad">Editar Actividad</string>
+    <!--List View Actividad-->
+    <string name="actividad_realizada_pregunta">¿Actividad Realizada?</string>
+    <string name="actividad_realizada_ok">¡Hecho!</string>
+    <string name="actividad_realizada_regular">¡Casi lo logras!</string>
+    <string name="actividad_realizada_mal">¡Vamos de nuevo!</string>
 
     <!--Dialog Options-->
     <string name="dialog_repe_cat">"Ya existe categoría con este nombre.\n¿Desea sustituirla?."</string>
     <string name="dialog_repe_rut">"Ya existe rutina con este nombre.\n¿Desea sustituirla?"</string>
     <string name="dialog_repe_act">"Ya existe actividad para esta hora.\n¿Desea sustituirla?"</string>
-    <string name="dialog_delete_cat">"Al eliminar la categoría seleccionada\nse eliminarán también las rutinas que contiene."</string>
+    <string name="dialog_delete_cat">"Al eliminar la categoría seleccionada\nse eliminará permanentemente y también\nse eliminarán también las rutinas que contiene."</string>
     <string name="dialog_delete_rut">"Al eliminar la rutina seleccionada\nse eliminarán también las actividades que contiene."</string>
     <string name="dialog_delete_act">"Se eliminará la actividad seleccionada."</string>
 

@@ -204,7 +204,6 @@ class DiaActual : AppCompatActivity() {
 
      override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
-            R.id.editarPerfil -> goToActivity<EditarPerfilActivity> {}
             R.id.logOut -> goToActivity<LoginActivity> {}
             R.id.graficas -> goToActivity<GraficasActivity> {}
         }

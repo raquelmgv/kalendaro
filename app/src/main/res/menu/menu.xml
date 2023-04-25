@@ -4,8 +4,6 @@
     >
     <item android:id="@+id/graficas"
         android:title="@string/menu_graficas"/>
-    <item android:id="@+id/editarPerfil"
-        android:title="@string/menu_editar_perfil"/>
     <item android:id="@+id/logOut"
         android:title="@string/menu_log_out"/>
 
