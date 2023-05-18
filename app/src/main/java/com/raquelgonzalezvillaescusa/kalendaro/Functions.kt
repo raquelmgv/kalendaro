@@ -50,11 +50,14 @@ fun Activity.displayDateyyyy(): String {
  * Convertir la fecha alfabetica en numérica con el fin de situar las rutinas en el calendario
  */
 fun Activity.ConvertDateBarViewToYYYYMMDD (fecha: String) : String{
-    var anioNumber = fecha.split(" ")[2]
-    var monthNumber = convertStringMonthToInt(fecha.split(" ")[1]);
-    var diaNumber = fecha.split(" ")[0]
-    var fechaNumber = "${anioNumber}${monthNumber}${diaNumber}"
-    return fechaNumber
+    if(fecha.isNotBlank()) {
+        var anioNumber = fecha.split(" ")[2]
+        var monthNumber = convertStringMonthToInt(fecha.split(" ")[1]);
+        var diaNumber = fecha.split(" ")[0]
+        var fechaNumber = "${anioNumber}${monthNumber}${diaNumber}"
+        return fechaNumber
+    }
+    return ""
 }
 
 fun Activity.displayCustomFace(faceNumber : Int) {

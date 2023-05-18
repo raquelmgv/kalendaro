@@ -3,7 +3,7 @@
     android:icon = "@drawable/ic_menu_black_24dp"
     >
     <item android:id="@+id/graficas"
-        android:title="@string/menu_graficas_estados_animo"/>
+        android:title="@string/menu_graficas"/>
     <item android:id="@+id/logOut"
         android:title="@string/menu_log_out"/>
 

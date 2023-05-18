@@ -23,7 +23,11 @@
     <string name="menu_configuracion">Configuración</string>
     <string name="menu_editar_perfil">Editar Perfil</string>
     <string name="menu_log_out">Cerrar Sesión</string>
-    <string name="menu_graficas_estados_animo">Estadísticas estados de ánimo</string>
+    <string name="menu_graficas_comer">Estadísticas sobre cómo he comido</string>
+    <string name="menu_graficas_ir_al_baño">Estadísticas sobre cómo he ido al baño</string>
+    <string name="menu_graficas_dormir">Estadísticas sobre cómo he dormido</string>
+    <string name="menu_graficas_estados_animo">Estadísticas de los estados de ánimo</string>
+    <string name="menu_graficas">Estadísticas</string>
     <!--Crear Categoria-->
     <string name="categoria_insert_nombre">Nombre de la categoría</string>
     <string name="categoria_buscar_galeria">GALERÍA</string>

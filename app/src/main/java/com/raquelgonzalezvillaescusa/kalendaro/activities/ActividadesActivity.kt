@@ -217,12 +217,7 @@ class ActividadesActivity : AppCompatActivity() {
             mAlertDialog.dismiss()
            // recargarActivity()
         }
-        mDialogView.button_editar.visibility = View.INVISIBLE
-        /*mDialogView.button_editar.setOnClickListener {
-            editarActividad(actName, actHour)
-            mAlertDialog.dismiss()
-            recargarActivity()
-        }*/
+
     }
 
     private fun eliminarActividad(actHour: String){

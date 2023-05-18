@@ -24,6 +24,7 @@ import com.google.firebase.storage.StorageReference
 import com.raquelgonzalezvillaescusa.kalendaro.*
 import com.raquelgonzalezvillaescusa.kalendaro.Fragments.DatePickerFragment
 import kotlinx.android.synthetic.main.activity_crear_rutina.*
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -67,7 +68,7 @@ class CrearRutinaActivity : AppCompatActivity() {
             bundle = intent.extras
             categoriaActual = bundle.getString("categoria")
             if(bundle.getString("fechaString")!== null){
-                fechaString = bundle.getString("fechaString");
+                fechaString = bundle.getString("fechaString")
             }
         }
         rootNode = FirebaseDatabase.getInstance()
@@ -95,13 +96,22 @@ class CrearRutinaActivity : AppCompatActivity() {
 
         rutinaInputFechaInicio.setOnClickListener { showDateInitPickerDialog() }
         rutinaInputFechaFin.setOnClickListener { showDateFinPickerDialog() }
+
         buttonRutinaImagenGaleria.setOnClickListener{clickOnGaleria()}
         buttonRutinaImagenCamara.setOnClickListener{clickOnCamara()}
         buttonGuardarRutina.setOnClickListener {
             val rutName = editTextCrearRutina.text.toString()
-            if (!isValidName(rutName)) {
+            val fechaInicio = DDMMMMYYYYFormatByYearMonthDay(
+            Date(anio.toInt() - 1900, mes.toInt() - 1, dia.toInt()))
+            val fechaFin = DDMMMMYYYYFormatByYearMonthDay(
+            Date(anioFin.toInt() - 1900, mesFin.toInt() - 1, diaFin.toInt()))
+            if (rutName.isBlank()) {
+                editTextCrearRutina.error = "Debe introducir un nombre para la rutina"
+            }else if (!isValidName(rutName)) {
                 editTextCrearRutina.error = "El nombre puede contener únicamente letras o numeros hasta 20 caracteres"
-            }else {
+            }else if(fechaFin.compareTo(fechaInicio)< 0){
+                rutinaInputFechaInicio.error = "La fecha de inicio es menor a la de fin"
+            }else{
                 guardarDatosDB(editTextCrearRutina.text.toString())
                 intent = Intent(this@CrearRutinaActivity, ActividadesActivity::class.java)
                 val b: Bundle = Bundle()
@@ -269,11 +279,20 @@ class CrearRutinaActivity : AppCompatActivity() {
             val data = baos.toByteArray()
             fotoCategoriaRef?.putBytes(data)
         }
+        var crearRutinaHelper : CrearRutinaHelper
+        if(!anio.isBlank() && !mes.isBlank() && !dia.isBlank()) {
+             crearRutinaHelper = CrearRutinaHelper(
+                rutinaNombre, DDMMMMYYYYFormatByYearMonthDay(
+                    Date(anio.toInt() - 1900, mes.toInt() - 1, dia.toInt())
+                ), DDMMMMYYYYFormatByYearMonthDay(
+                    Date(anioFin.toInt() - 1900, mesFin.toInt() - 1, diaFin.toInt())
+                )
+            )
+        }else{
+            crearRutinaHelper = CrearRutinaHelper(rutinaNombre, "", "")
 
-        var crearRutinaHelper = CrearRutinaHelper(rutinaNombre, DDMMMMYYYYFormatByYearMonthDay(
-            Date(anio.toInt() - 1900, mes.toInt()-1, dia.toInt())
-        ), DDMMMMYYYYFormatByYearMonthDay(
-            Date(anioFin.toInt() - 1900, mesFin.toInt()-1, diaFin.toInt())))
+        }
+
 
         reference.child(rutinaNombre).setValue(crearRutinaHelper)
     }
