@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="?attr/colorBackgroundFloating"
     android:fillViewport="true"
-    tools:context=".activities.GraficasActivity">
+    tools:context=".activities.GraficasComerActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:layout_height="74dp"
             android:background="@color/colorPrimary"
             android:elevation="4dp"
-            android:text="@string/estadisticas_usuario"
+            android:text="@string/grafica_comer"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/bar_text_size"
@@ -34,15 +34,15 @@
             tools:ignore="MissingConstraints" />
 
         <Button
-            android:id="@+id/button_estados_animo"
+            android:id="@+id/button_graficaMesActual"
             android:layout_width="380dp"
             android:layout_height="75dp"
             android:layout_marginBottom="60dp"
             android:background="@drawable/button_ripple_bg"
-            android:text="@string/estadisticas_graficas_estados_animo"
+            android:text="@string/grafica_estados_animo_dias_mes"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/login_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/button_comido"
+            app:layout_constraintBottom_toTopOf="@+id/button_graficaMeses"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,47 +51,32 @@
             tools:ignore="MissingConstraints" />
 
         <Button
-            android:id="@+id/button_comido"
+            android:id="@+id/button_graficaMeses"
             android:layout_width="380dp"
             android:layout_height="75dp"
             android:layout_marginBottom="60dp"
             android:background="@drawable/button_ripple_bg"
-            android:text="@string/estadisticas_graficas_comer"
+            android:text="@string/grafica_estados_animo_meses_anio"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/login_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/button_ido_banio"
+            app:layout_constraintBottom_toTopOf="@+id/button_graficaAnios"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints" />
 
         <Button
-            android:id="@+id/button_ido_banio"
+            android:id="@+id/button_graficaAnios"
             android:layout_width="380dp"
             android:layout_height="75dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="144dp"
             android:background="@drawable/button_ripple_bg"
-            android:text="@string/estadisticas_graficas_ir_al_banio"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/login_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/button_dormido"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.516"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints" />
-
-        <Button
-            android:id="@+id/button_dormido"
-            android:layout_width="380dp"
-            android:layout_height="75dp"
-            android:layout_marginBottom="48dp"
-            android:background="@drawable/button_ripple_bg"
-            android:text="@string/estadisticas_graficas_dormir"
+            android:text="@string/grafica_estados_animo_anios"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/login_text_size"
             app:layout_constraintBottom_toTopOf="@+id/conceptualMenuIconsBar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.483"
+            app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints" />
 

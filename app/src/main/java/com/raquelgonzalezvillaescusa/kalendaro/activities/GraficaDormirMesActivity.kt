@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_dia_actual.*
 import java.text.NumberFormat
 
 
-class GraficaEAnimoMesActivity : AppCompatActivity() {
+class GraficaDormirMesActivity : AppCompatActivity() {
     val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance()}
     var currentUser : String = mAuth.uid.toString()
     private lateinit var toolbar: Toolbar
@@ -33,11 +33,11 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_grafica_ea_mes_actual)
+        setContentView(R.layout.activity_grafica_dormir_mes_actual)
         displayConceptualMenu()
         toolbar = findViewById(R.id.toolbar)
         setUpToolbar(toolbar)
-        grafica = findViewById(R.id.graficaEstadosAnimoMesActual)
+        grafica = findViewById(R.id.graficaDormirMesActual)
         labelsX = setLabelsX()
         addDataPointsDaysOfCurrentMonth { puntosArray ->
             makeGraph(puntosArray)
@@ -96,7 +96,7 @@ class GraficaEAnimoMesActivity : AppCompatActivity() {
                         for(datosDia in datosDiaActualData.children){
                             faceNumber = 0.0
                             if(mes.equals(mesActual())){
-                                if (datosDia.key.toString() == "faceNumber") {
+                                if (datosDia.key.toString() == "dormirState") {
                                     faceNumber = datosDia.value.toString().toDouble()
                                     if(!puntosArray.contains(DataPoint(diaMes.toInt().toDouble(), faceNumber))){
                                         puntosArray.add(DataPoint(diaMes.toInt().toDouble(), faceNumber))

@@ -10,11 +10,10 @@ import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.raquelgonzalezvillaescusa.kalendaro.*
 import com.raquelgonzalezvillaescusa.kalendaro.R
-import kotlinx.android.synthetic.main.activity_graficas.conceptualMenuIconsBar
-import kotlinx.android.synthetic.main.activity_graficas.*
+import kotlinx.android.synthetic.main.activity_graficas_comer.*
 
 
-class GraficasActivity : AppCompatActivity() {
+class GraficasComerActivity : AppCompatActivity() {
     val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance()}
     var currentUser : String = mAuth.uid.toString()
     private lateinit var toolbar: Toolbar
@@ -22,22 +21,19 @@ class GraficasActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_graficas)
+        setContentView(R.layout.activity_graficas_comer)
         displayConceptualMenu()
         toolbar = findViewById(R.id.toolbar)
         setUpToolbar(toolbar)
 
-        button_estados_animo.setOnClickListener {
-            goToActivity<GraficasEstadosAnimoActivity>()
+        button_graficaMesActual.setOnClickListener {
+            goToActivity<GraficaComerMesActivity>()
         }
-        button_comido.setOnClickListener {
-            goToActivity<GraficasComerActivity>()
+        button_graficaMeses.setOnClickListener {
+            goToActivity<GraficaComerMesesActivity>()
         }
-        button_ido_banio.setOnClickListener {
-            goToActivity<GraficasBanioActivity>()
-        }
-        button_dormido.setOnClickListener {
-            goToActivity<GraficasDormirActivity>()
+        button_graficaAnios.setOnClickListener {
+            goToActivity<GraficaComerAniosActivity>()
         }
 
     }

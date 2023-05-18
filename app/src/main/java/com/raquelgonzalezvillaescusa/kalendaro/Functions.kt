@@ -88,13 +88,13 @@ fun Activity.displayCustomFace(faceNumber : Int) {
 
 fun Activity.displayCustomComer(comerState : Int) {
     when (comerState) {
-        1 -> {
+        3 -> {
             customButton_comer.setBackgroundResource(R.drawable.diaactual_arasaac_comer_1)
         }
         2 -> {
             customButton_comer.setBackgroundResource(R.drawable.diaactual_arasaac_comer_2)
         }
-        3 -> {
+        1 -> {
             customButton_comer.setBackgroundResource(R.drawable.diaactual_arasaac_comer_3)
         }
         else -> {
@@ -105,13 +105,13 @@ fun Activity.displayCustomComer(comerState : Int) {
 
 fun Activity.displayCustomBanio(banioState : Int) {
     when (banioState) {
-        1 -> {
+        3 -> {
             customButton_banio.setBackgroundResource(R.drawable.diaactual_arasaac_ir_al_banio_1)
         }
         2 -> {
             customButton_banio.setBackgroundResource(R.drawable.diaactual_arasaac_ir_al_banio_2)
         }
-        3 -> {
+        1 -> {
             customButton_banio.setBackgroundResource(R.drawable.diaactual_arasaac_ir_al_banio_3)
         }
         else -> {
@@ -122,13 +122,13 @@ fun Activity.displayCustomBanio(banioState : Int) {
 
 fun Activity.displayCustomDormir(dormirState : Int) {
     when (dormirState) {
-        1 -> {
+        3 -> {
             customButton_dormir.setBackgroundResource(R.drawable.diaactual_arasaac_dormir_1)
         }
         2 -> {
             customButton_dormir.setBackgroundResource(R.drawable.diaactual_arasaac_dormir_2)
         }
-        3 -> {
+        1 -> {
             customButton_dormir.setBackgroundResource(R.drawable.diaactual_arasaac_dormir_3)
         }
         else -> {

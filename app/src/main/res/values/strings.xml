@@ -23,11 +23,7 @@
     <string name="menu_configuracion">Configuración</string>
     <string name="menu_editar_perfil">Editar Perfil</string>
     <string name="menu_log_out">Cerrar Sesión</string>
-    <string name="menu_graficas_comer">Estadísticas sobre cómo he comido</string>
-    <string name="menu_graficas_ir_al_baño">Estadísticas sobre cómo he ido al baño</string>
-    <string name="menu_graficas_dormir">Estadísticas sobre cómo he dormido</string>
-    <string name="menu_graficas_estados_animo">Estadísticas de los estados de ánimo</string>
-    <string name="menu_graficas">Estadísticas</string>
+    <string name="menu_graficas">Mis estadísticas</string>
     <!--Crear Categoria-->
     <string name="categoria_insert_nombre">Nombre de la categoría</string>
     <string name="categoria_buscar_galeria">GALERÍA</string>
@@ -70,12 +66,23 @@
     <string name="dialog_delete_rut">"Al eliminar la rutina seleccionada\nse eliminarán también las actividades que contiene."</string>
     <string name="dialog_delete_act">"Se eliminará la actividad seleccionada."</string>
 
-    <!--Graficas-->
-    <string name="graficas">Gráficas</string>
-    <string name="graficas_estados_animo">Estados de ánimo</string>
-    <string name="grafica_estados_animo">GRAFICAS DE LOS ESTADOS DE ÁNIMO </string>
+    <!--Estadísticas-->
+    <string name="estadisticas_usuario">MIS ESTADÍSTICAS</string>
+    <string name="estadisticas_graficas_estados_animo">Mis estados de ánimo</string>
+    <string name="estadisticas_graficas_comer">Cómo he comido</string>
+    <string name="estadisticas_graficas_ir_al_banio">Cómo he ido al baño</string>
+    <string name="estadisticas_graficas_dormir">Cómo he dormido</string>
+    <!--Gráficas-->
     <string name="grafica_estados_animo_anios">PROMEDIO DE LOS ÚLTIMOS 5 AÑOS</string>
     <string name="grafica_estados_animo_meses_anio">PROMEDIO DEL AÑO ACTUAL</string>
     <string name="grafica_estados_animo_dias_mes">MES ACTUAL</string>
+    <!--Graficas Estados de Animo-->
+    <string name="grafica_estados_animo">GRAFICAS SOBRE\nMIS ESTADOS DE ÁNIMO</string>
+    <!--Graficas Comer-->
+    <string name="grafica_comer">GRAFICAS SOBRE\nCÓMO HE COMIDO </string>
+    <!--Graficas Ir al baño-->
+    <string name="grafica_ir_al_banio">GRAFICAS SOBRE\nCÓMO HE IDO AL BAÑO </string>
+    <!--Graficas Dormir-->
+    <string name="grafica_dormir">GRAFICAS SOBRE\nCÓMOHE DORMIDO </string>
 
 </resources>

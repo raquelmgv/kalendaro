@@ -30,12 +30,44 @@
             android:parentActivityName=".activities.DiaActual"/>
         <activity android:name=".activities.EditarPerfilActivity" />
         <activity android:name=".activities.GraficasActivity" />
+
+        <activity android:name=".activities.GraficasComerActivity"
+            android:parentActivityName=".activities.GraficasActivity"/>
+        <activity android:name=".activities.GraficaComerMesActivity"
+            android:parentActivityName=".activities.GraficasComerActivity"/>
+        <activity android:name=".activities.GraficaComerMesesActivity"
+            android:parentActivityName=".activities.GraficasComerActivity"/>
+        <activity android:name=".activities.GraficaComerAniosActivity"
+            android:parentActivityName=".activities.GraficasComerActivity"/>
+
+
+        <activity android:name=".activities.GraficasBanioActivity"
+            android:parentActivityName=".activities.GraficasActivity"/>
+        <activity android:name=".activities.GraficaBanioMesActivity"
+            android:parentActivityName=".activities.GraficasBanioActivity"/>
+        <activity android:name=".activities.GraficaBanioMesesActivity"
+            android:parentActivityName=".activities.GraficasBanioActivity"/>
+        <activity android:name=".activities.GraficaBanioAniosActivity"
+            android:parentActivityName=".activities.GraficasBanioActivity"/>
+
+        <activity android:name=".activities.GraficasDormirActivity"
+            android:parentActivityName=".activities.GraficasActivity"/>
+        <activity android:name=".activities.GraficaDormirMesActivity"
+            android:parentActivityName=".activities.GraficasDormirActivity"/>
+        <activity android:name=".activities.GraficaDormirMesesActivity"
+            android:parentActivityName=".activities.GraficasDormirActivity"/>
+        <activity android:name=".activities.GraficaDormirAniosActivity"
+            android:parentActivityName=".activities.GraficasDormirActivity"/>
+
+        <activity android:name=".activities.GraficasEstadosAnimoActivity"
+            android:parentActivityName=".activities.GraficasActivity"/>
         <activity android:name=".activities.GraficaEAnimoMesActivity"
-            android:parentActivityName=".activities.GraficasActivity"/>
+            android:parentActivityName=".activities.GraficasEstadosAnimoActivity"/>
         <activity android:name=".activities.GraficaEAnimoMesesActivity"
-            android:parentActivityName=".activities.GraficasActivity"/>
+            android:parentActivityName=".activities.GraficasEstadosAnimoActivity"/>
         <activity android:name=".activities.GraficaEAnimoAniosActivity"
-            android:parentActivityName=".activities.GraficasActivity"/>
+            android:parentActivityName=".activities.GraficasEstadosAnimoActivity"/>
+
         <activity android:name=".activities.RutinasActivity"
             android:parentActivityName=".activities.CategoriasActivity" />
         <activity android:name=".activities.CalendarActivity"

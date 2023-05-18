@@ -14,11 +14,9 @@ import com.jjoe64.graphview.DefaultLabelFormatter
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.BarGraphSeries
 import com.jjoe64.graphview.series.DataPoint
-import com.jjoe64.graphview.series.LineGraphSeries
 import com.raquelgonzalezvillaescusa.kalendaro.*
 import com.raquelgonzalezvillaescusa.kalendaro.R
 import kotlinx.android.synthetic.main.activity_grafica_ea_meses.*
-import java.text.NumberFormat
 
 
 class GraficaEAnimoAniosActivity : AppCompatActivity() {

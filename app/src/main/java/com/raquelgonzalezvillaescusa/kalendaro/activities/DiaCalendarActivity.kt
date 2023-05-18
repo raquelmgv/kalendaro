@@ -84,30 +84,30 @@ class DiaCalendarActivity : AppCompatActivity() {
         }
         customButton_banio.setOnClickListener{
             when (banioState) {
-                0 -> banioState = 1
-                1 -> banioState = 2
-                2 -> banioState = 3
-                3 -> banioState = 0
+                0 -> banioState = 3
+                3 -> banioState = 2
+                2 -> banioState = 1
+                1 -> banioState = 0
             }
             var diaActHelper: DiaActualHelper = DiaActualHelper(fecha, faceNumber, comerState, banioState, dormirState)
             reference.child(fecha).setValue(diaActHelper)
         }
         customButton_comer.setOnClickListener{
             when (comerState) {
-                0 -> comerState = 1
-                1 -> comerState = 2
-                2 -> comerState = 3
-                3 -> comerState = 0
+                0 -> comerState = 3
+                3 -> comerState = 2
+                2 -> comerState = 1
+                1 -> comerState = 0
             }
             var diaActHelper: DiaActualHelper = DiaActualHelper(fecha, faceNumber, comerState, banioState, dormirState)
             reference.child(fecha).setValue(diaActHelper)
         }
         customButton_dormir.setOnClickListener{
             when (dormirState) {
-                0 -> dormirState = 1
-                1 -> dormirState = 2
-                2 -> dormirState = 3
-                3 -> dormirState = 0
+                0 -> dormirState = 3
+                3 -> dormirState = 2
+                2 -> dormirState = 1
+                1 -> dormirState = 0
             }
             var diaActHelper: DiaActualHelper = DiaActualHelper(fecha, faceNumber, comerState, banioState, dormirState)
             reference.child(fecha).setValue(diaActHelper)
