@@ -1,5 +1,6 @@
 package com.raquelgonzalezvillaescusa.kalendaro
 
+import Data.CrearRutinaHelper
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -197,7 +198,7 @@ fun Activity.getRutinasDiaCorrespondiente(rootNode : FirebaseDatabase, storageRe
                     val rutName = rutinasList.get(i)
                     val catName = categoriaCorrespondienteList.get(i)
                     referenceRutina = rootNode.getReference("$currentUser/categoriasRutinaData/$catName/rutinas")
-                    showRutinaDeleteView(mContext, rootNode, storageReference, rutName, currentUser,  catName, referenceRutina);
+                    showRutinaDayDeleteView(mContext, rootNode, storageReference, rutName, currentUser,  catName, referenceRutina);
 
                     true
                 }
@@ -324,6 +325,21 @@ fun Activity.showRutinaDeleteView(mContext: Context, rootNode : FirebaseDatabase
         };
         mAlertDialog.dismiss()
         //reloadActivity(mContext, null, null)
+    }
+
+}
+
+fun Activity.showRutinaDayDeleteView(mContext: Context, rootNode : FirebaseDatabase, storageReference: StorageReference?,
+                                  rutName: String, currentUser: String, catName: String, reference: DatabaseReference) {
+    val mDialogView = LayoutInflater.from(mContext).inflate(R.layout.popup_delete_item, null)
+    val mBuilder = AlertDialog.Builder(mContext).setView(mDialogView).setTitle(rutName)
+    mDialogView.textView_popup_delete.setText(R.string.dialog_delete_rut_day)
+    val mAlertDialog = mBuilder.show()
+    mDialogView.button_cancelar.setOnClickListener { mAlertDialog.dismiss() }
+    mDialogView.button_eliminar.setOnClickListener {
+        var rutinaSinFechaHelper : CrearRutinaHelper = CrearRutinaHelper(rutName, "", "")
+        reference.child(rutName).setValue(rutinaSinFechaHelper);
+        mAlertDialog.dismiss()
     }
 
 }
