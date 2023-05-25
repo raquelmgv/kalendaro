@@ -63,7 +63,7 @@
     <string name="dialog_repe_rut">"Ya existe rutina con este nombre.\n¿Desea sustituirla?"</string>
     <string name="dialog_repe_act">"Ya existe actividad para esta hora.\n¿Desea sustituirla?"</string>
     <string name="dialog_delete_cat">"Al eliminar la categoría seleccionada\nse eliminará permanentemente y también\nse eliminarán también las rutinas que contiene."</string>
-    <string name="dialog_delete_rut">"Al eliminar la rutina seleccionada\nse eliminarán también las actividades que contiene."</string>
+    <string name="dialog_delete_rut">"Al eliminar la rutina seleccionada\nse eliminará del calendario y\nse eliminarán también las actividades que contiene."</string>
     <string name="dialog_delete_rut_day">"La rutina seleccionada se eliminará\ndel calendario pero podrá consultarse\nen la seccion de Tareas."</string>
 
     <string name="dialog_delete_act">"Se eliminará la actividad seleccionada."</string>
