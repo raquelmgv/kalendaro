@@ -233,7 +233,7 @@ class CrearActividadActivity : AppCompatActivity() {
         b.putString("nombreRutinaCreada", rutinaActual)
         intent.putExtras(b)
         startActivity(intent)
-        //finish()
+        finish()
     }
     override fun onBackPressed() {
         super.onBackPressed()

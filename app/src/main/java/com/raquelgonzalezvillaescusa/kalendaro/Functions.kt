@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.AdapterView
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.database.*
@@ -335,11 +336,11 @@ fun Activity.showRutinaDayDeleteView(mContext: Context, rootNode : FirebaseDatab
     val mBuilder = AlertDialog.Builder(mContext).setView(mDialogView).setTitle(rutName)
     mDialogView.textView_popup_delete.setText(R.string.dialog_delete_rut_day)
     val mAlertDialog = mBuilder.show()
+    mDialogView.button_editar.visibility = View.INVISIBLE
     mDialogView.button_cancelar.setOnClickListener { mAlertDialog.dismiss() }
     mDialogView.button_eliminar.setOnClickListener {
         var rutinaSinFechaHelper : CrearRutinaHelper = CrearRutinaHelper(rutName, "", "")
         reference.child(rutName).setValue(rutinaSinFechaHelper);
         mAlertDialog.dismiss()
     }
-
 }

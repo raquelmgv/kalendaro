@@ -43,7 +43,7 @@ class ActividadesActivity : AppCompatActivity() {
 
     private lateinit var rootNode : FirebaseDatabase
     private lateinit var reference_actividades : DatabaseReference
-    private var actividadState: Int = 0
+
 
     /*1*/
     internal var storage: FirebaseStorage? = null
@@ -211,6 +211,7 @@ class ActividadesActivity : AppCompatActivity() {
         val mBuilder = AlertDialog.Builder(this).setView(mDialogView).setTitle(actName)
         mDialogView.textView_popup_delete.setText(R.string.dialog_delete_act)
         val mAlertDialog = mBuilder.show()
+        mDialogView.button_editar.setOnClickListener { editarActividad(actName, actHour) }
         mDialogView.button_cancelar.setOnClickListener { mAlertDialog.dismiss() }
         mDialogView.button_eliminar.setOnClickListener {
             eliminarActividad(actHour)

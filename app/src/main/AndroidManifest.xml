@@ -70,6 +70,8 @@
 
         <activity android:name=".activities.RutinasActivity"
             android:parentActivityName=".activities.CategoriasActivity" />
+        <activity android:name=".activities.EditarRutinaActivity"
+            android:parentActivityName=".activities.RutinasActivity" />
         <activity android:name=".activities.CalendarActivity"
             android:parentActivityName=".activities.DiaActual"/>
         <activity android:name=".activities.DiaActual" />
